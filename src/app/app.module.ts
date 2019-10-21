@@ -17,8 +17,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AngularFirestoreModule, FirestoreSettingsToken } from '@angular/fire/firestore';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthGuard } from '@angular/fire/auth-guard';
-import { SearchPipe } from './_shared/pipes/search.pipe';
-import { SortPipe } from './_shared/pipes/sort.pipe';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { PopoverPageModule } from './pages/popover/popover.module';
 
 // Initial Firebase with ionicApp
 @NgModule({
@@ -31,7 +31,9 @@ import { SortPipe } from './_shared/pipes/sort.pipe';
     ReactiveFormsModule,
     AngularFireAuthModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    AngularFireDatabaseModule,
+    PopoverPageModule
   ],
   providers: [
     StatusBar,

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
 import { UserInterface } from 'src/app/core/models/user.interface';
+import { Router } from '@angular/router';
+import { ROUTE } from 'src/app/_constants/route.constant';
 
 @Component({
   selector: 'app-profile',
@@ -14,6 +16,7 @@ export class ProfilePage implements OnInit {
 
   constructor(
     private navCtrl: NavController,
+    private router: Router,
     private authService: AuthenticationService
   ) { }
 
@@ -32,5 +35,15 @@ export class ProfilePage implements OnInit {
     } catch (error) {}
   }
 
+  async logout() {
+    try {
+      await this.authService.logoutUser();
+      this.router.navigateByUrl('login');
+    } catch (error) {}
+  }
+
+  gotoUserDetail() {
+    this.navCtrl.navigateForward(ROUTE.HOME_DETAIL);
+  }
 
 }

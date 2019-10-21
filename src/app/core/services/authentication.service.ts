@@ -65,6 +65,7 @@ export class AuthenticationService {
       address: user.address,
       phone: user.phone,
       imageProfile: user.imageProfile
+      // imageProfile: user.imageProfile
     };
 
     userRef.set(data, { merge: true });

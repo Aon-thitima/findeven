@@ -1,0 +1,75 @@
+<ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="tabActivity"></ion-back-button>
+      </ion-buttons>
+      <ion-title>{{activity?.name}}</ion-title>
+      <ion-buttons slot="end" (click)="presentPopover($event)">
+        <ion-button>
+          <ion-icon slot="icon-only" name="md-more"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  
+  
+  <ion-content>
+    <div id="box" *ngIf="dataChat?.length <= 0" class="center">
+      <img src="https://image.flaticon.com/icons/svg/942/942802.svg" width="64px" height="64px" alt="image">
+      <p>
+        ไม่มีข้อมูลการสนทนา
+      </p>
+    </div>
+
+  
+
+
+    <div id="box" class="chat-container" *ngIf="dataChat?.length > 0">
+      <div *ngFor="let item of dataChat">
+        <!-- //me -->
+        <div *ngIf="item?.joinBy === userInfo?.uid">
+          <div class="time-me">{{item?.createAt | moment}}</div>
+          <div class="arrow-right"></div>
+          <div class="box-me">
+            <div class="bubble-me">
+              <div class="txt-justify">
+                {{item?.message}}
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <!-- //other -->
+  
+        <div *ngIf="item?.joinBy !== userInfo?.uid">
+          <div class="time-other">{{ item?.fullName }}</div>
+          <div class="time-other" style="margin-top: 16px">{{item?.createAt | moment}}</div>
+          <div>
+            <img class="avatar" [src]="item?.imgBy" alt="avatar">
+          </div>
+          <div style="margin-top: 10px">
+            <div class="arrow-left"></div>
+            <div class="box-other">
+              <div class="bubble-other">{{item?.message}}</div>
+            </div>
+          </div>
+        </div>
+  
+      </div>
+  
+      <div class="clear-fix"></div>
+  
+    </div>
+
+
+
+    <!-- // footer chat -->
+    <div class="footer-chat-box">
+      <div class="chat-box-border">
+        <ion-icon class="custom-icon" name="logo-octocat"></ion-icon>
+        <input type="text" placeholder="พิมพ์ข้อความ" class="custom-input" [(ngModel)]="chat"
+          (keyup.enter)="sendMessage($event)">
+        <ion-icon class="custom-icon custom-icon-right" name="ios-send" (click)="sendMessage($event)"></ion-icon>
+      </div>
+    </div>
+  </ion-content>

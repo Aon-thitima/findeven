@@ -7,7 +7,7 @@ const routes: Routes = [
   {
     path: 'members',
     canActivate: [AuthenticationGuard],
-    loadChildren: './pages/menu/menu.module#MenuPageModule',
+    loadChildren: './pages/tabs/tabs.module#TabsPageModule',
   },
   {
     path: 'about',
@@ -19,7 +19,9 @@ const routes: Routes = [
     loadChildren: './pages/login/login.module#LoginPageModule'
   },
   { path: 'register', loadChildren: './pages/register/register.module#RegisterPageModule' },
-  { path: 'reset-password', loadChildren: './pages/reset-password/reset-password.module#ResetPasswordPageModule' }
+  { path: 'reset-password', loadChildren: './pages/reset-password/reset-password.module#ResetPasswordPageModule' },
+  { path: 'chats', loadChildren: './pages/chats/chats.module#ChatsPageModule' },
+  { path: 'popover', loadChildren: './pages/popover/popover.module#PopoverPageModule' },
 ];
 
 @NgModule({

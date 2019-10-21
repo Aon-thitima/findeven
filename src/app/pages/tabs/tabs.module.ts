@@ -14,7 +14,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'tabs/(tabHome:tabHome)',
+        redirectTo: 'tabs/(tabProfile:tabProfile)',
         pathMatch: 'full'
       },
       {
@@ -38,12 +38,42 @@ const routes: Routes = [
             loadChildren: '../tab-settings/tab-settings.module#TabSettingsPageModule'
           }
         ]
+      },
+      {
+        path: 'tabProfile',
+        children: [
+          {
+            path: '',
+            loadChildren: '../profile/profile.module#ProfilePageModule'
+          }
+        ]
+      },
+      {
+        path: 'tabActivity',
+        children: [
+          {
+            path: '',
+            loadChildren: '../tab-activity/tab-activity.module#TabActivityPageModule'
+          },
+        ]
+      },
+      {
+        path: 'tabActivity/detail',
+        loadChildren: '../activity-detail/activity-detail.module#ActivityDetailPageModule'
+      },
+      {
+        path: 'tabActivity/:id',
+        loadChildren: '../activity-detail/activity-detail.module#ActivityDetailPageModule'
+      },
+      {
+        path: 'tabActivity/chat/:id',
+        loadChildren: '../chats/chats.module#ChatsPageModule'
       }
     ]
   },
   {
     path: '',
-    redirectTo: 'tabs/tabHome',
+    redirectTo: 'tabs/tabProfile',
     pathMatch: 'full'
   }
 ];

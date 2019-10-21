@@ -2,18 +2,34 @@
   <ion-toolbar color="primary">
     <ion-title>ข้อมูลส่วนตัว</ion-title>
     <ion-buttons slot="start">
-        <ion-back-button defaulthref=""></ion-back-button>
-    </ion-buttons> 
+      <ion-back-button defaulthref=""></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content fullscreen class="page-profile">
-  <div align="center">
-    <img class="profile-image top-10px" src="http://www.brunningonline.net/simon/blog/archives/South%20Park%20Avatar.jpg">
-    <h4>{{userInfo?.fullName}}</h4>
+  
+    <div style="text-align: center;">
+      <img class="profile-image top-10px"
+        src="http://www.brunningonline.net/simon/blog/archives/South%20Park%20Avatar.jpg">
+    </div>
+    <br>
+    <div padding>
+      Email : {{userInfo?.email}}<br>
+      FullName : {{userInfo?.fullName}}<br>
+      Phone : {{userInfo?.phone}}<br>
+      Address : {{userInfo?.address}}<br>
+    </div>
+
+    <!-- <h4>{{userInfo?.fullName}}</h4>
     <h5>{{userInfo?.email}}</h5>
     <h5>{{userInfo?.phone}}</h5>
     <h5>{{userInfo?.address}}</h5>
-    <h5>{{ '24'}} years old</h5>
-  </div>
+    <h5>{{ '24'}} years old</h5> -->
+    <!-- <ion-button (click)="gotoUserDetail()">Details</ion-button> -->
+    <div style="text-align: center;">
+      <ion-button (click)="logout()">Logout</ion-button>
+    </div>
+
+  
 </ion-content>

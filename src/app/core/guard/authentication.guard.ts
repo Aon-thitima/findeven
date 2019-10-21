@@ -19,7 +19,6 @@ export class AuthenticationGuard implements CanActivate  {
         map(user => !!user),
         tap(loggedIn => {
           if (!loggedIn) {
-            console.log('access denied');
             this.router.navigateByUrl('login');
           }
         })

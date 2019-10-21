@@ -5,34 +5,42 @@
 </ion-header>
 
 <ion-content padding>
-  <form class="form" [formGroup]="form"  (ngSubmit)="loginUser(form)">
- 
+  <form class="form" [formGroup]="form" (ngSubmit)="loginUser(form)">
+
+    <div style="text-align: center">
+      <img class="img"
+        src="https://scontent.fbkk2-8.fna.fbcdn.net/v/t1.15752-9/72363626_1373366046159787_7321439627741495296_n.png?_nc_cat=105&_nc_eui2=AeGNHZ-tYrI_jvFasoa7WevxtNpe0y_GNVUb4bdiNXAhZGa0hpGP9WOP3mSeDqFVJJDDJy6bmfJTQLC9nuYrpg04_R3K7rqliO3XTSLESJRSAQ&_nc_oc=AQk07qm2DgCKP_1lGdyNFVGVfUoTLaTE6FJXYDQbtvEL3dutSr_IMTgHb42C9NxJ92g&_nc_ht=scontent.fbkk2-8.fna&oh=2bdba3e92265cf8db4edcb1f14bce237&oe=5E3CFEFC"
+        alt="" />
+    </div>
+
     <ion-item>
-      <ion-label  position="floating" color="primary">อีเมล</ion-label>
+      <ion-label position="floating" color="primary">อีเมล</ion-label>
       <ion-input type="text" formControlName="email"></ion-input>
     </ion-item>
     <div class="validation-errors">
       <ng-container *ngFor="let validation of validationMessages.email">
-        <div class="error-message" *ngIf="form.get('email').hasError(validation.type) && (form.get('email').dirty || form.get('email').touched)">
+        <div class="error-message"
+          *ngIf="form.get('email').hasError(validation.type) && (form.get('email').dirty || form.get('email').touched)">
           {{ validation.message }}
         </div>
       </ng-container>
     </div>
- 
+
     <ion-item>
-      <ion-label  position="floating" color="primary">รหัสผ่าน</ion-label>
+      <ion-label position="floating" color="primary">รหัสผ่าน</ion-label>
       <ion-input type="password" formControlName="password" class="form-controll" required></ion-input>
     </ion-item>
     <div class="validation-errors">
       <ng-container *ngFor="let validation of validationMessages.password">
-        <div class="error-message" *ngIf="form.get('password').hasError(validation.type) && (form.get('password').dirty || form.get('password').touched)">
+        <div class="error-message"
+          *ngIf="form.get('password').hasError(validation.type) && (form.get('password').dirty || form.get('password').touched)">
           {{ validation.message }}
         </div>
       </ng-container>
     </div>
- 
+
     <ion-button class="submit-btn" expand="block" type="submit">เข้าสู่ระบบ</ion-button>
- 
+
     <label class="error-message">{{errorMessage}}</label>
   </form>
   <ion-button color="light" expand="block" (click)="goToRegisterPage()">ลงทะเบียน</ion-button>
@@ -40,4 +48,11 @@
     หากจำข้อมูลไม่ได้?
     <a (click)="gotoResetPassword()">ลืมรหัสผ่าน</a>
   </p>
+
+  <div style="text-align: center">
+    <img class="img2"
+      src="https://scontent.fbkk2-8.fna.fbcdn.net/v/t1.15752-9/69337865_2351757578417028_5861116507622211584_n.png?_nc_cat=105&_nc_eui2=AeHWWwfKsOz5jpmIO4c5EWbnSVPzpfdbF17ynpHrD5ICaoNGEJl72sovQ6w8ksTrruAVhZ2FPgtkx93SyiAsPHQqCxFMEQh7C5-5rUQ1HZ2xzA&_nc_oc=AQkaS2eLPyJYcMv5qaE2CzNVWqyAxn44-Aka8V6rLS9gZuHghWBo_qF6CiOaJoj89oA&_nc_ht=scontent.fbkk2-8.fna&oh=d95db9712336c8661df92dcfe4380361&oe=5E38E980"
+      alt="" />
+  </div>
+
 </ion-content>

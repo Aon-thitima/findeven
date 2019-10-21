@@ -38,6 +38,7 @@ export class RegisterPage implements OnInit {
   ngOnInit() {
     this.form = this.formBuilder.group({
       fullName: new FormControl(''),
+      imageProfile: new FormControl(''),
       phone: new FormControl(''),
       address: new FormControl(''),
       email: new FormControl('', Validators.compose([
