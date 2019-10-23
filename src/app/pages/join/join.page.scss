@@ -1,0 +1,13 @@
+ion-content {
+    &.page-sport {
+        .spot{
+            width: 50px;
+            height: 50px;
+            border-radius: 100%;
+        }    
+        
+        .top-10px {
+            margin-top: 10px;
+        }
+    }
+}
