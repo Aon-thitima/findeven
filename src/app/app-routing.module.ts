@@ -27,6 +27,7 @@ const routes: Routes = [
   { path: 'chats', loadChildren: './pages/chats/chats.module#ChatsPageModule' },
   { path: 'popover', loadChildren: './pages/popover/popover.module#PopoverPageModule' },
   { path: 'join', loadChildren: './pages/join/join.module#JoinPageModule' },
+  { path: 'group-sport/:id', loadChildren: './pages/group-sport/group-sport.module#GroupSportPageModule' },
   
 ];
 
