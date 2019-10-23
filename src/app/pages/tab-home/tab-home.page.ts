@@ -49,8 +49,12 @@ export class TabHomePage implements OnInit {
     this.userInfo = await this.authService.getUser();
   }
 
-  PostActivity(){
-    
+  postActivity(){
+    this.navCtrl.navigateForward(ROUTE.POST_ACTIVITY)
+  }
+
+  joinActivity(){
+    this.navCtrl.navigateForward(ROUTE.JOIN_ACTIVITY)
   }
 
   addActivity() {
