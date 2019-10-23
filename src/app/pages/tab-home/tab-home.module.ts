@@ -11,6 +11,11 @@ const routes: Routes = [
   {
     path: '',
     component: TabHomePage
+  },
+  {
+    path: '',
+    redirectTo: 'tabs/(tabProfile:tabProfile)',
+    pathMatch: 'full'
   }
 ];
 
