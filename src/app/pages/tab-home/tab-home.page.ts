@@ -49,6 +49,10 @@ export class TabHomePage implements OnInit {
     this.userInfo = await this.authService.getUser();
   }
 
+  PostActivity(){
+    
+  }
+
   addActivity() {
     this.activity.createBy =  this.userInfo.uid;
     this.activityService.addActivity(this.activity).then(() => {
