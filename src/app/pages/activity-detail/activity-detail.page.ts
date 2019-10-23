@@ -16,11 +16,12 @@ export class ActivityDetailPage implements OnInit {
 
   public activity: any = {
     name: '',
-    notes: '',
+    type_activity: '',
+    description: '',
     Location: '',
     datet: '',
     sex: '',
-    sport:'football,basketball,badminton,Pingpong,swimming,Futsal,tabletennis,Fitness,Run',
+    type_sport:'',
     createBy: ''
   };
   userInfo: UserInterface;
@@ -48,12 +49,13 @@ export class ActivityDetailPage implements OnInit {
 
   addActivity() {
     this.activity.createBy =  this.userInfo.uid;
-    this.activityService.addActivity(this.activity).then(() => {
-      this.navCtrl.navigateForward('members/tabs/tabActivity'),
-        this.showToast("Activity added");
-    }, err => {
-      this.showToast('There was a problem adding your Activity :(');
-    });
+    console.log(this.activity);
+    // this.activityService.addActivity(this.activity).then(() => {
+    //   this.navCtrl.navigateForward('members/tabs/tabActivity'),
+    //     this.showToast("Activity added");
+    // }, err => {
+    //   this.showToast('There was a problem adding your Activity :(');
+    // });
   }
 
   deleteActivity() {
