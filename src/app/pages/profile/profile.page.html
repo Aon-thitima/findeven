@@ -9,9 +9,14 @@
 
 <ion-content fullscreen class="page-profile">
   
-    <div style="text-align: center;">
+    <!-- <div style="text-align: center;">
       <img class="profile-image top-10px"
         src="http://www.brunningonline.net/simon/blog/archives/South%20Park%20Avatar.jpg">
+    </div> -->
+    <div style="text-align: center;">
+      <img class="profile-image top-10px"
+        src="{{userInfo?.imageProfile}}">
+        <ion-button (click)="gotoPhoto()">แก้ไขข้อมูลส่วนตัว</ion-button >
     </div>
     <!-- <br> -->
     <div padding>
