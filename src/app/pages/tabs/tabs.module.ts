@@ -14,7 +14,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'tabs/(tabProfile:tabProfile)',
+        redirectTo: 'tabs/(tabHome:tabHome)',
         pathMatch: 'full'
       },
       {
@@ -73,7 +73,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'tabs/tabProfile',
+    redirectTo: 'tabs/tabHome',
     pathMatch: 'full'
   }
 ];
