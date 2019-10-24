@@ -5,54 +5,61 @@
 </ion-header>
 
 <ion-content padding>
-  <form class="form" [formGroup]="form"  (ngSubmit)="tryRegister(form)">
+  <form class="form" [formGroup]="form" (ngSubmit)="tryRegister(form)">
 
-      <ion-item>
-          <ion-label  position="floating" color="primary">รูปโปรไฟล์</ion-label>
-          <ion-textarea type="text" formControlName="imageProfile"></ion-textarea>
-        </ion-item>
     <ion-item>
-      <ion-label  position="floating" color="primary">ชื่อ</ion-label>
+      <!-- <ion-label  position="floating" color="primary">รูปโปรไฟล์</ion-label> -->
+      <input id="test" type="file" formControlName="imageProfile" onchange="encodeImageFileAsURL(this)" />
+    </ion-item>
+
+    <!-- <ion-item>
+      <ion-label position="floating" color="primary">รูปโปรไฟล์</ion-label>
+      <ion-textarea type="text" formControlName="imageProfile"></ion-textarea>
+    </ion-item> -->
+    <ion-item>
+      <ion-label position="floating" color="primary">ชื่อ</ion-label>
       <ion-input type="text" formControlName="fullName"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label  position="floating" color="primary">Email</ion-label>
+      <ion-label position="floating" color="primary">Email</ion-label>
       <ion-input type="text" formControlName="email"></ion-input>
     </ion-item>
     <div class="validation-errors">
       <ng-container *ngFor="let validation of validationMessages.email">
-        <div class="error-message" *ngIf="form.get('email').hasError(validation.type) && (form.get('email').dirty || form.get('email').touched)">
+        <div class="error-message"
+          *ngIf="form.get('email').hasError(validation.type) && (form.get('email').dirty || form.get('email').touched)">
           {{ validation.message }}
         </div>
       </ng-container>
     </div>
- 
+
     <ion-item>
-      <ion-label  position="floating" color="primary">Password</ion-label>
+      <ion-label position="floating" color="primary">Password</ion-label>
       <ion-input type="password" formControlName="password" class="form-controll" required></ion-input>
     </ion-item>
     <div class="validation-errors">
       <ng-container *ngFor="let validation of validationMessages.password">
-        <div class="error-message" *ngIf="form.get('password').hasError(validation.type) && (form.get('password').dirty || form.get('password').touched)">
+        <div class="error-message"
+          *ngIf="form.get('password').hasError(validation.type) && (form.get('password').dirty || form.get('password').touched)">
           {{ validation.message }}
         </div>
       </ng-container>
     </div>
 
     <ion-item>
-      <ion-label  position="floating" color="primary">เบอร์โทร</ion-label>
+      <ion-label position="floating" color="primary">เบอร์โทร</ion-label>
       <ion-input type="text" formControlName="phone"></ion-input>
     </ion-item>
- 
+
     <ion-item>
-      <ion-label  position="floating" color="primary">ที่อยู่</ion-label>
+      <ion-label position="floating" color="primary">ที่อยู่</ion-label>
       <ion-textarea type="text" formControlName="address"></ion-textarea>
     </ion-item>
 
-    
-    
-    <ion-button  class="submit-btn" type="submit" expand="block" [disabled]="!form.valid">ลงทะเบียน</ion-button>
+
+
+    <ion-button class="submit-btn" type="submit" expand="block" [disabled]="!form.valid">ลงทะเบียน</ion-button>
     <label class="error-message">{{errorMessage}}</label>
     <label class="success-message">{{successMessage}}</label>
   </form>
