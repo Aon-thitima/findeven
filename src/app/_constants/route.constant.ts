@@ -6,7 +6,8 @@ export const ROUTE = {
     ABOUT: 'about',
     HOME_DETAIL: 'members/tabs/tabHome/homeDetail',
     POST_ACTIVITY :'members/tabs/tabActivity/detail',
-    JOIN_ACTIVITY :'/join'
+    JOIN_ACTIVITY :'/join',
+    PHOTO : 'photo'
 };
 
 
