@@ -50,12 +50,12 @@ export class ActivityDetailPage implements OnInit {
   addActivity() {
     this.activity.createBy =  this.userInfo.uid;
     console.log(this.activity);
-    // this.activityService.addActivity(this.activity).then(() => {
-    //   this.navCtrl.navigateForward('members/tabs/tabActivity'),
-    //     this.showToast("Activity added");
-    // }, err => {
-    //   this.showToast('There was a problem adding your Activity :(');
-    // });
+    this.activityService.addActivity(this.activity).then(() => {
+      this.navCtrl.navigateForward('members/tabs/tabActivity'),
+        this.showToast("Activity added");
+    }, err => {
+      this.showToast('There was a problem adding your Activity :(');
+    });
   }
 
   deleteActivity() {
