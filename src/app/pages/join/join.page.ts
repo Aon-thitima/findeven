@@ -66,11 +66,12 @@ export class JoinPage implements OnInit {
 
   public activity: any = {
     name: '',
-    notes: '',
+    type_activity: '',
+    description: '',
     Location: '',
     datet: '',
     sex: '',
-    sport:'football,basketball,badminton,Pingpong,swimming,Futsal,tabletennis,Fitness,Run',
+    type_sport:'',
     createBy: ''
   };
   userInfo: UserInterface;
