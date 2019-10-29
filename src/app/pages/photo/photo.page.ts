@@ -28,6 +28,7 @@ export class PhotoPage implements OnInit {
   ) { }
 
   ngOnInit() {
+    
   }
 
 }
