@@ -15,13 +15,12 @@
         <img
           src="https://hips.hearstapps.com/ghk.h-cdn.co/assets/18/01/1515005599-miniature-pinscher.jpg">
       </ion-avatar>
-      <ion-label>ชื่อกิจกรรม:</ion-label>
+      <ion-label>{{ item?.name }}</ion-label>
       <ion-button fill="outline" slot="end">join</ion-button>
     </ion-item>
 
     <ion-card-content>
-        <h2>{{ item?.name }}</h2>
-        <p>{{ item?.Location }}</p>
+        <h2>{{ item?.Location }}</h2>
         <p>{{ item?.description }}</p>
         <p>{{ item?.datet }}</p>
     </ion-card-content>
