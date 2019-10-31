@@ -1,4 +1,4 @@
-<ion-header>
+<!-- <ion-header>
   <ion-toolbar>
     <ion-title>Home</ion-title>
     <ion-buttons slot="start">
@@ -76,9 +76,7 @@
   </ion-row>
   <br>
   <div>
-    <!-- <ion-item> -->
     <ion-label position="stacked" style="color: blue;">วิธีการใช้ แอปพลิเคชัน Find Event</ion-label>
-    <!-- </ion-item> -->
     <ion-item>
       <p class="tt">
         หากต้องการเข้าร่วมกิจกรรมของผู้อื่นกดไปที่ปุ่มหลังจากนั้นเลือกกีฬาที่อยากเล่นแล้วเข้าไปหาโพสต์ที่ถูกใจได้เลย
@@ -103,4 +101,28 @@
 
     <button position="stacked" class="btj" (click)="joinActivity()">Join</button>
   </div>
-</ion-content>
+</ion-content> -->
+
+<!-- หน้าแรกแสดงกลุ่มของกิจกรรฒทั้งหมด -->
+<ion-app>
+  <ion-header translucent>
+    <ion-toolbar>
+      <ion-title>ประเภทกิจกรรม</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content fullscreen>
+    <ion-list>
+      <!-- ลูปข้อมูลกลุ่มของกีฬา -->
+      <ion-item *ngFor="let item of sportList" (click)="onClickActivity(item?.id)">
+        <ion-avatar slot="start" class="image-icon">
+          <img [src]="item?.image">
+        </ion-avatar>
+        <ion-label>
+          <h2>{{item?.name}}</h2>
+        </ion-label>
+        <ion-icon name="arrow-dropright"></ion-icon>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-app>

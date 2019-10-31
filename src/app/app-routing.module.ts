@@ -28,8 +28,16 @@ const routes: Routes = [
   { path: 'popover', loadChildren: './pages/popover/popover.module#PopoverPageModule' },
   { path: 'join', loadChildren: './pages/join/join.module#JoinPageModule' },
   { path: 'group-sport/:id', loadChildren: './pages/group-sport/group-sport.module#GroupSportPageModule' },
-  { path: 'photo', loadChildren: './pages/photo/photo.module#PhotoPageModule' }  
-  
+  { path: 'photo', loadChildren: './pages/photo/photo.module#PhotoPageModule' },
+  { path: 'activitys/:id', loadChildren: './pages/activitys/activitys.module#ActivitysPageModule' },
+  {
+    path: 'activity/:id',
+    loadChildren: './pages/activity-detail/activity-detail.module#ActivityDetailPageModule'
+  },
+  {
+    path: 'activity-create/:groupID',
+    loadChildren: './pages/activity-detail/activity-detail.module#ActivityDetailPageModule'
+  },
 ];
 
 @NgModule({

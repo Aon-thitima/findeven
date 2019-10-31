@@ -1,3 +1,4 @@
+import { SPORT_GROUP } from './../../../assets/data-master/sport-group';
 import { ROUTE } from './../../_constants/route.constant';
 import { Component, OnInit } from '@angular/core';
 import { UserInterface } from 'src/app/core/models/user.interface';
@@ -13,6 +14,7 @@ import { ActivityService } from 'src/app/core/services/activity.service.service'
 })
 export class TabHomePage implements OnInit {
   [x: string]: any;
+  public sportList = SPORT_GROUP;
 
   public activity: any = {
     name: '',
@@ -21,7 +23,7 @@ export class TabHomePage implements OnInit {
     Location: '',
     datet: '',
     sex: '',
-    type_sport:'',
+    type_sport: '',
     createBy: ''
   };
 
@@ -37,29 +39,29 @@ export class TabHomePage implements OnInit {
   ) { }
 
   ngOnInit() {
-    const id = this.activatedRoute.snapshot.paramMap.get('id');
-    if (id) {
-      this.activityService.getActivityDetail(id).subscribe(activity => {
-        this.activity = activity;
-      });
-    }
-    this.getUserDetail();
+    // const id = this.activatedRoute.snapshot.paramMap.get('id');
+    // if (id) {
+    //   this.activityService.getActivityDetail(id).subscribe(activity => {
+    //     this.activity = activity;
+    //   });
+    // }
+    // this.getUserDetail();
   }
 
-  async getCurrentUser() {
-    this.userInfo = await this.authService.getUser();
-  }
+  // async getCurrentUser() {
+  //   this.userInfo = await this.authService.getUser();
+  // }
 
-  postActivity(){
-    this.navCtrl.navigateForward(ROUTE.POST_ACTIVITY)
-  }
+  // postActivity() {
+  //   this.navCtrl.navigateForward(ROUTE.POST_ACTIVITY)
+  // }
 
-  joinActivity(){
-    this.navCtrl.navigateForward(ROUTE.JOIN_ACTIVITY)
-  }
+  // joinActivity() {
+  //   this.navCtrl.navigateForward(ROUTE.JOIN_ACTIVITY)
+  // }
 
   addActivity() {
-    this.activity.createBy =  this.userInfo.uid;
+    this.activity.createBy = this.userInfo.uid;
     this.activityService.addActivity(this.activity).then(() => {
       this.navCtrl.navigateForward('members/tabs/tabActivity'),
         this.showToast("Activity added");
@@ -68,46 +70,52 @@ export class TabHomePage implements OnInit {
     });
   }
 
-  deleteActivity() {
-    this.activityService.delateActivity(this.activity.id).then(() => {
-      this.navCtrl.navigateForward('members/tabs/tabActivity'),
-        this.showToast("Activity deleted");
-    }, err => {
-      this.showToast('There was a problem deleting your Activity :(');
-    });
-  }
+  // deleteActivity() {
+  //   this.activityService.delateActivity(this.activity.id).then(() => {
+  //     this.navCtrl.navigateForward('members/tabs/tabActivity'),
+  //       this.showToast("Activity deleted");
+  //   }, err => {
+  //     this.showToast('There was a problem deleting your Activity :(');
+  //   });
+  // }
 
-  updateActivity() {
-    this.activityService.updateActivity(this.activity).then(() => {
-      this.showToast("Activity updated");
-    }, err => {
-      this.showToast('There was a problem updating your Activity :(');
-    });
-  }
+  // updateActivity() {
+  //   this.activityService.updateActivity(this.activity).then(() => {
+  //     this.showToast("Activity updated");
+  //   }, err => {
+  //     this.showToast('There was a problem updating your Activity :(');
+  //   });
+  // }
 
-  showToast(mag) {
-    this.toastCtel.create({
-      message: mag,
-      duration: 2000
-    }).then(toast => toast.present());
-  }
+  // showToast(mag) {
+  //   this.toastCtel.create({
+  //     message: mag,
+  //     duration: 2000
+  //   }).then(toast => toast.present());
+  // }
 
-  private async getUserDetail() {
-    try {
-      const userInfo = await this.authService.getUser();
-      this.userInfo = userInfo;
-    } catch (error) {}
-  }
+  // private async getUserDetail() {
+  //   try {
+  //     const userInfo = await this.authService.getUser();
+  //     this.userInfo = userInfo;
+  //   } catch (error) { }
+  // }
 
-  async logout() {
-    try {
-      await this.authService.logoutUser();
-      this.router.navigateByUrl('login');
-    } catch (error) {}
-  }
+  // async logout() {
+  //   try {
+  //     await this.authService.logoutUser();
+  //     this.router.navigateByUrl('login');
+  //   } catch (error) { }
+  // }
 
-  gotoUserDetail() {
-    this.navCtrl.navigateForward(ROUTE.HOME_DETAIL);
-  }
+  // gotoUserDetail() {
+  //   this.navCtrl.navigateForward(ROUTE.HOME_DETAIL);
+  // }
+
+
+  // คลิกไปหน้ากิจกรรมนั้นๆ ตาม id ของกลุ่มกีฬา
+  onClickActivity(id) {
+    this.navCtrl.navigateForward(`${ROUTE.ACTIVITY}/${id}`)
+   }
 
 }
