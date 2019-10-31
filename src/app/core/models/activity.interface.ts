@@ -4,9 +4,10 @@ export interface ActivityInterface {
     type_activity?: string,
     description?: string,
     Location?: string,
-    datet?: string,
+    date?: string,
     sex?: string,
     type_sport?: string,
     createBy?: string,
-    group_sport?: string
+    group_sport?: string,
+    people?: string
 }

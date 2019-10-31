@@ -63,15 +63,20 @@
     </ion-select>
 
   </ion-item>
+
+  <!-- ต้องกลับมาแก้ไข  -->
+  <ion-item>
+      <ion-label position="stacked">จำนวนคนที่เข้าร่วมกิจกรรม</ion-label>
+      <ion-input type="text" [(ngModel)]="activity.people"></ion-input>
+    </ion-item>
+
+  <ion-footer *ngIf="!activity.id">
+      <ion-button expand="block" fill="outline" (click)="addActivity()">บันทึก</ion-button>  
+  </ion-footer>
+
 </ion-content>
 
-<ion-footer *ngIf="!activity.id">
-  <ion-toolbar color="success">
-    <ion-button expand="full" fill="clear" color="light" (click)="addActivity()">
-      บันทึก
-    </ion-button>
-  </ion-toolbar>
-</ion-footer>
+
 
 <ion-footer *ngIf="activity.id">
   <ion-row>

@@ -69,7 +69,7 @@ export class JoinPage implements OnInit {
     type_activity: '',
     description: '',
     Location: '',
-    datet: '',
+    date: '',
     sex: '',
     type_sport:'',
     createBy: ''
