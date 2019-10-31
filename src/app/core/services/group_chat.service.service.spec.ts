@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
-import { GroupchatService } from './groupchat.service';
+import { Group_chatService } from './group_chat.service';
 
 
 
-describe('Groupchat.ServiceService', () => {
+describe('Group_chat.ServiceService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: GroupchatService = TestBed.get(GroupchatService);
+    const service: Group_chatService = TestBed.get(Group_chatService);
     expect(service).toBeTruthy();
   });
 });
