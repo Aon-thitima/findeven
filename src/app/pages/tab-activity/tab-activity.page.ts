@@ -17,7 +17,7 @@ export class TabActivityPage implements OnInit {
   public activity: Observable<ActivityInterface[]>;
   userInfo: UserInterface;
   constructor(
-    private activityServers: ActivityService,
+    private activityService: ActivityService,
     public alertController: AlertController,
     private navCtrl: NavController,
     private chatService: ChatService,
@@ -25,7 +25,7 @@ export class TabActivityPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.activity = this.activityServers.getActivity();
+    this.activity = this.activityService.getActivity();
     this.getCurrentUser();
   }
 
@@ -34,7 +34,7 @@ export class TabActivityPage implements OnInit {
   }
 
   async clickJoinChat(id) {
-    this.activityServers.getActivityDetail(id).subscribe(async activity => {
+    this.activityService.getActivityDetail(id).subscribe(async activity => {
       const checkJoinGroup = await this.chatService.checkStatusJoin(this.userInfo.uid, activity.id);
       if (activity && checkJoinGroup) {
         const toast = await this.alertController.create({

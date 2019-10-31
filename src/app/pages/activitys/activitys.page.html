@@ -9,20 +9,36 @@
 
 <ion-content>
 
-  <ion-card>
+  <ion-card *ngFor="let item of (activity | async)">
     <ion-item>
-      <!-- <img src="https://images.pexels.com/photos/67636/rose-blue-flower-rose-blooms-67636.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt=""> -->
       <ion-avatar slot="start">
         <img
-          src="https://images.pexels.com/photos/67636/rose-blue-flower-rose-blooms-67636.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500">
+          src="https://hips.hearstapps.com/ghk.h-cdn.co/assets/18/01/1515005599-miniature-pinscher.jpg">
       </ion-avatar>
-      <ion-label>ion-item in a card, icon left, button right</ion-label>
-      <ion-button fill="outline" slot="end">View</ion-button>
+      <ion-label>ชื่อกิจกรรม:</ion-label>
+      <ion-button fill="outline" slot="end">join</ion-button>
     </ion-item>
 
     <ion-card-content>
-      This is content, without any paragraph or header tags,
-      within an ion-card-content element.
+        <h2>{{ item?.name }}</h2>
+        <p>{{ item?.Location }}</p>
+        <p>{{ item?.description }}</p>
+        <p>{{ item?.datet }}</p>
+    </ion-card-content>
+    <ion-card-content>
+        <ion-grid>
+            <ion-row>
+              <ion-col>
+                  <ion-icon name="chatboxes" (click)="clickJoinChat(item.id)"></ion-icon>
+              </ion-col>
+              <ion-col>
+                  <ion-icon name="create"></ion-icon>
+              </ion-col>
+              <ion-col>
+                  <ion-icon name="trash"></ion-icon>
+              </ion-col>
+            </ion-row>
+        </ion-grid>
     </ion-card-content>
   </ion-card>
 
