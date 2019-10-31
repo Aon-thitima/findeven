@@ -5,11 +5,11 @@
   </ion-header>
   
   <ion-content>
-    <!-- <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
       <ion-fab-button routerLink="detail">
         <ion-icon name="add"></ion-icon>
       </ion-fab-button>
-    </ion-fab> -->
+    </ion-fab>
   
     <ion-list>
   
@@ -23,7 +23,6 @@
             </ion-label>
             <ion-icon name='chatbubbles' item-start (click)="clickJoinChat(item.id)"></ion-icon>
             <ion-icon *ngIf="item.id" name="create" [routerLink]="['/members', 'tabs', 'tabActivity', item.id]"></ion-icon>
-            <!-- <ion-icon name="md-more"></ion-icon> -->
           </ion-item>
     </ion-list>
   </ion-content>
