@@ -2,23 +2,23 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, DocumentReference } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
-import { GroupchatInterface } from '../models/groupchat.intereface';
+import { Group_chatInterface } from '../models/group_chat.intereface';
 
 @Injectable({
   providedIn: 'root'
 })
-export class GroupchatService {
+export class Group_chatService {
   [x: string]: any;
 
   // ตัวแปรเก็บค่า
-  private groupchat: Observable<GroupchatInterface[]>;
+  private group_chat: Observable<Group_chatInterface[]>;
   // เปรียบเหมือน คำว่า table
-  private groupchatCollection: AngularFirestoreCollection<GroupchatInterface>;
+  private group_chatCollection: AngularFirestoreCollection<Group_chatInterface>;
   constructor(
     private afs: AngularFirestore,
   ) {
-    this.groupchatCollection = this.afs.collection<GroupchatInterface>('groupchat'); // คำสั่งให้สร้าง table "activity" ชื่อตาราง
-    this.groupchat = this.groupchatCollection.snapshotChanges()
+    this.group_chatCollection = this.afs.collection<Group_chatInterface>('group_chat'); // คำสั่งให้สร้าง table "activity" ชื่อตาราง
+    this.group_chat = this.group_chatCollection.snapshotChanges()
       .pipe(
         map(actions => {
           return actions.map(a => {
@@ -28,5 +28,9 @@ export class GroupchatService {
           });
         })
       );
+  }
+
+     delateGroup_chat(id: string): Promise<void> {
+        return this.group_chatCollection.doc(id).delete();
  }
 }
