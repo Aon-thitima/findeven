@@ -9,5 +9,9 @@ export interface ActivityInterface {
     type_sport?: string,
     createBy?: string,
     group_sport?: string,
-    people?: string
+    people?: string,
+    userInfo?: any
+    sold_out?: boolean,
+    joined?: boolean,
+    updateAt?: string
 }

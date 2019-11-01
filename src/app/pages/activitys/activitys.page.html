@@ -12,32 +12,34 @@
   <ion-card *ngFor="let item of (activity | async)">
     <ion-item>
       <ion-avatar slot="start">
-        <img
-          src="https://hips.hearstapps.com/ghk.h-cdn.co/assets/18/01/1515005599-miniature-pinscher.jpg">
+        <img [src]="item?.userInfo?.imageProfile">
       </ion-avatar>
-      <ion-label>{{ item?.name }}</ion-label>
-      <ion-button fill="outline" slot="end">join</ion-button>
+      <ion-label>{{item?.userInfo?.fullName}}</ion-label>
+      <ion-button *ngIf="!item?.sold_out && !item?.joined" fill="outline" slot="end" (click)="clickJoinActivity(item)">join</ion-button>
+      <ion-button *ngIf="item?.sold_out && !item?.joined" color="danger" slot="end">Sold Out</ion-button>
+      <ion-button *ngIf="item?.joined" color="success" slot="end" (click)="clickUnJoinActivity(item)">Joined</ion-button>
     </ion-item>
 
     <ion-card-content>
-        <h2>{{ item?.Location }}</h2>
-        <p>{{ item?.description }}</p>
-        <p>{{ item?.date }}</p>
+      <h2> กิจกรรม: {{ item?.name }} </h2>
+      <p> สถานที่: {{ item?.Location }} </p>
+      <p class="cut-text"> รายละเอียด: {{ item?.description }}</p>
+      <p> เวลา : {{item?.date | moment}}</p>
     </ion-card-content>
     <ion-card-content>
-        <ion-grid>
-            <ion-row>
-              <ion-col>
-                  <ion-icon name="chatboxes" (click)="clickJoinChat(item.id)"></ion-icon>
-              </ion-col>
-              <ion-col>
-                  <ion-icon name="create"></ion-icon>
-              </ion-col>
-              <ion-col>
-                  <ion-icon name="trash" (click)="DelectJoinChat(item.id)"></ion-icon>
-              </ion-col>
-            </ion-row>
-        </ion-grid>
+      <ion-grid>
+        <ion-row>
+          <ion-col class="text-left">
+            <ion-icon style="float: right" name="chatboxes" (click)="clickJoinChat(item.id)"></ion-icon>
+          </ion-col>
+          <ion-col *ngIf="userInfo?.uid === item?.createBy">
+            <ion-icon style="float: right" name="create" ></ion-icon>
+          </ion-col>
+          <ion-col *ngIf="userInfo?.uid === item?.createBy">
+            <ion-icon style="float: right" name="trash"  (click)="DelectJoinChat(item.id)"></ion-icon>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     </ion-card-content>
   </ion-card>
 

@@ -3,5 +3,6 @@ export const ValidatePattern = {
 }
 
 export enum FireStoreDoc {
-    USER_PROFILE = 'userProfile'
+    USER_PROFILE = 'userProfile',
+    JOIN_ACTIVITY = 'join_activity'
 }

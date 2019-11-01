@@ -16,18 +16,6 @@ import { SPORT_GROUP } from 'src/assets/data-master/sport-group';
 })
 export class ActivityDetailPage implements OnInit {
   public groupSport = SPORT_GROUP
-
-  // public activity: any = {
-  //   name: '',
-  //   type_activity: '',
-  //   description: '',
-  //   Location: '',
-  //   date: '',
-  //   sex: '',
-  //   type_sport: '',
-  //   createBy: ''
-  // };
-
   public activity: ActivityInterface = {}
   public id;
   public groupSportID: any;
@@ -61,6 +49,7 @@ export class ActivityDetailPage implements OnInit {
   addActivity() {
     this.activity.createBy = this.userInfo.uid;
     this.activity.group_sport = this.groupSportID;
+    this.activity.userInfo = this.userInfo
     this.activityService.addActivity(this.activity).then(() => {
       this.navCtrl.navigateForward(`${ROUTE.ACTIVITY}/${this.groupSportID}`),
         this.showToast("Activity added");

@@ -4,7 +4,7 @@ export interface UserInterface extends AuthInterface {
     uid: string;
     name?: string;
     fullName?: string;
-    sex?:string;
+    sex?: string;
     phone?: string;
     address?: string;
     imageProfile?: string;
