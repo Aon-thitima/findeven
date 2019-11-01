@@ -17,11 +17,7 @@ export class Group_chatService {
   constructor(
     private afs: AngularFirestore,
   ) {
-<<<<<<< HEAD:src/app/core/services/group_chat.service.ts
     this.group_chatCollection = this.afs.collection<Group_chatInterface>('groupchat'); // คำสั่งให้สร้าง table "activity" ชื่อตาราง
-=======
-    this.group_chatCollection = this.afs.collection<Group_chatInterface>('group_chat'); // คำสั่งให้สร้าง table "activity" ชื่อตาราง
->>>>>>> ee3d4a1b46d6b56f093a3d901a62022a0c2bb057:src/app/core/services/groupchat.service.ts
     this.group_chat = this.group_chatCollection.snapshotChanges()
       .pipe(
         map(actions => {
@@ -32,9 +28,5 @@ export class Group_chatService {
           });
         })
       );
-  }
-
-     delateGroup_chat(id: string): Promise<void> {
-        return this.group_chatCollection.doc(id).delete();
  }
 }
