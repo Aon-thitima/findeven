@@ -33,10 +33,13 @@ export class TabActivityPage implements OnInit {
     this.userInfo = await this.authService.getUser();
   }
 
+
+
   async clickJoinChat(id) {
     this.activityService.getActivityDetail(id).subscribe(async activity => {
       const checkJoinGroup = await this.chatService.checkStatusJoin(this.userInfo.uid, activity.id);
       if (activity && checkJoinGroup) {
+
         const toast = await this.alertController.create({
           header: 'ต้องการเข้าร่วมกิจกรรม?',
           message: `ท่านต้องการเข้าร่วมกิจกรรม ${activity.name} ?`,
