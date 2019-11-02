@@ -19,7 +19,7 @@ import { UserInterface } from 'src/app/core/models/user.interface';
   styleUrls: ['./activitys.page.scss'],
 })
 export class ActivitysPage implements OnInit {
-  public activity: Observable<ActivityInterface[]>;
+  public activity: any = [];
   public groupSport = SPORT_GROUP
   public idSport
   public sportActive
@@ -41,7 +41,7 @@ export class ActivitysPage implements OnInit {
   }
 
   getActivity() {
-    this.activity = this.activityService.getActivity();
+    this.activityService.getActivity().subscribe(val => this.activity = val);
   }
   // ดึงข้อมูล user ปัจจุบัน
   async getCurrentUser() {
@@ -55,6 +55,17 @@ export class ActivitysPage implements OnInit {
   clickJoinChat(id) {
     console.log('===========>', id)
 
+  }
+
+  async searchActivity(textSearch) {
+    try {
+      if (textSearch !== '') {
+        this.activity = await this.activityService.searchActivity(textSearch, true)
+      } else {
+        this.activity = await this.activityService.searchActivity(textSearch, false)
+      }
+    } catch (error) {
+    }
   }
 
   async clickJoinActivity(activity) {

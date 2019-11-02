@@ -44,6 +44,41 @@ export class ActivityService {
       );
   }
 
+
+  searchActivity(search: string, reset) {
+    return new Promise((resolve, reject) => {
+      const activity = this.activityCollection.snapshotChanges()
+        .pipe(
+          map(actions => {
+            return actions.map(a => {
+              const data = a.payload.doc.data();
+              const id = a.payload.doc.id;
+              // ตรวจสอบ  ลิมิต กิจกรรม
+              this.joinActivityService.getActivityJoin(id)
+                .then(val => (Number(data['people']) <= val['length']) ? Object.assign(data, { sold_out: true }) : '')
+              // ตรวจสอบ เข้าร่วมกิจกรรม
+              this.joinActivityService.getActivityJoinUser(id, this.userInfo.uid)
+                .then(val => val['length'] > 0 && val[0]['activity_id'] === id ? Object.assign(data, { joined: true }) : '')
+              Object.assign(data, { id })
+              // ถ้า  reset == true ให้ search
+              if (reset) {
+                if (data.Location === search) {
+                  return data;
+                }
+              } else {
+                 // ถ้า  reset == false ไม่ต้อง search
+                return data;
+              }
+            });
+          })
+        );
+      activity.subscribe(
+        (data) => resolve(data.filter(v => v !== undefined)),
+        (err) => reject(err)
+      )
+    })
+  }
+
   // ดึงข้อมูล user ปัจจุบัน
   async getCurrentUser() {
     this.userInfo = await this.authService.getUser();

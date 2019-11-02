@@ -5,11 +5,14 @@
     </ion-buttons>
     <ion-title>กิจกรรม {{ sportActive?.name }}</ion-title>
   </ion-toolbar>
+  <ion-toolbar>
+    <ion-searchbar (input)="searchActivity($event.target.value)"></ion-searchbar>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
-  <ion-card *ngFor="let item of (activity | async)">
+  <ion-card *ngFor="let item of activity">
     <ion-item>
       <ion-avatar slot="start">
         <img [src]="item?.userInfo?.imageProfile">
