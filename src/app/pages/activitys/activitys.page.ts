@@ -26,7 +26,7 @@ export class ActivitysPage implements OnInit {
   public userInfo: UserInterface;
   public sexText = {
     Male: 'ผู้ชาย',
-    Female: 'ผู้ชาย',
+    Female: 'ผู้หญิง',
     LG_BT: 'เพศทางเลือก'
   }
   constructor(
