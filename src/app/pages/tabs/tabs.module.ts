@@ -65,10 +65,10 @@ const routes: Routes = [
         path: 'tabActivity/:id',
         loadChildren: '../activity-detail/activity-detail.module#ActivityDetailPageModule'
       },
-      {
-        path: 'tabActivity/chat/:id',
-        loadChildren: '../chats/chats.module#ChatsPageModule'
-      }
+      // {
+      //   path: 'tabActivity/chat/:id',
+      //   loadChildren: '../chats/chats.module#ChatsPageModule'
+      // }
     ]
   },
   {

@@ -1,29 +1,25 @@
 <ion-header>
-    <ion-toolbar>
-      <ion-title>กิจกรรม</ion-title>
-    </ion-toolbar>
-  </ion-header>
-  
-  <ion-content>
-    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-      <ion-fab-button routerLink="detail">
-        <ion-icon name="add"></ion-icon>
-      </ion-fab-button>
-    </ion-fab>
-  
-    <ion-list>
-  
-        <ion-item *ngFor="let item of (activity | async)">
-          {{ item?.id }}
-            <ion-avatar slot="start">
-              <img src="https://previews.123rf.com/images/kitipol/kitipol1510/kitipol151000032/46627692-football-badge-logo-template-design-soccer-team-vector-illuatration.jpg">
-            </ion-avatar>
-            <ion-label>
-              <h2>{{ item?.name }}</h2>
-              <p>{{ item?.notes }}</p>
-            </ion-label>
-            <ion-icon name='chatbubbles' item-start></ion-icon>
-            <ion-icon *ngIf="item.id" name="create" [routerLink]="['/members', 'tabs', 'tabActivity', item.id]"></ion-icon>
-          </ion-item>
-    </ion-list>
-  </ion-content>
+  <ion-toolbar>
+    <ion-title>Chats</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <!-- Sliding item with text options on both sides -->
+    <ion-item-sliding *ngFor="let item of chatList">
+      <ion-item (click)="onChat(item?.activity_id)">
+        <ion-avatar slot="start" class="image-icon">
+          <img [src]="item?.image">
+        </ion-avatar>
+        <ion-label>{{ item?.activityInfo?.name }}</ion-label>
+      </ion-item>
+
+      <ion-item-options side="end">
+        <ion-item-option (click)="onClickDelete(item)" color="danger">
+          <ion-icon name="trash"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>

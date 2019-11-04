@@ -30,10 +30,15 @@ const routes: Routes = [
     path: 'activity/:id',
     loadChildren: './pages/activity-detail/activity-detail.module#ActivityDetailPageModule'
   },
+   {
+    path: 'chat/:id',
+    loadChildren: './pages/chats/chats.module#ChatsPageModule'
+  },
   {
     path: 'activity-create/:groupID',
     loadChildren: './pages/activity-detail/activity-detail.module#ActivityDetailPageModule'
   },
+  { path: 'activity-read-more/:id', loadChildren: './pages/activity-read-more/activity-read-more.module#ActivityReadMorePageModule' },
 ];
 
 @NgModule({

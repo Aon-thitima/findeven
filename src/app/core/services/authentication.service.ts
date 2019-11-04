@@ -64,7 +64,8 @@ export class AuthenticationService {
       fullName: user.fullName,
       address: user.address,
       phone: user.phone,
-      imageProfile: user.imageProfile
+      imageProfile: user.imageProfile,
+      sex: user.sex
       // imageProfile: user.imageProfile
     };
 

@@ -1,4 +1,3 @@
-import { MomentPipe } from 'src/app/_shared/pipes/moment.pipe';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -6,12 +5,12 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { TabActivityPage } from './tab-activity.page';
+import { ActivityReadMorePage } from './activity-read-more.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: TabActivityPage
+    component: ActivityReadMorePage
   }
 ];
 
@@ -22,6 +21,6 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [TabActivityPage]
+  declarations: [ActivityReadMorePage]
 })
-export class TabActivityPageModule {}
+export class ActivityReadMorePageModule {}
