@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivityInterface } from 'src/app/core/models/activity.interface';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ActivityService } from 'src/app/core/services/activity.service.service';
-import { ToastController, NavController } from '@ionic/angular';
+import { ToastController, NavController, AlertController } from '@ionic/angular';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
 import { UserInterface } from 'src/app/core/models/user.interface';
 import { SPORT_GROUP } from 'src/assets/data-master/sport-group';
@@ -25,7 +25,8 @@ export class ActivityDetailPage implements OnInit {
     private activityService: ActivityService,
     private toastCtel: ToastController,
     private navCtrl: NavController,
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    public alertController: AlertController,
   ) { }
 
   ngOnInit() {
@@ -46,33 +47,86 @@ export class ActivityDetailPage implements OnInit {
   }
 
   // function สร้างกิจกรรม
-  addActivity() {
+  async addActivity() {
     this.activity.createBy = this.userInfo.uid;
     this.activity.group_sport = this.groupSportID;
     this.activity.userInfo = this.userInfo
-    this.activityService.addActivity(this.activity).then(() => {
-      this.navCtrl.navigateForward(`${ROUTE.ACTIVITY}/${this.groupSportID}`),
-        this.showToast("Activity added");
-    }, err => {
-      this.showToast('There was a problem adding your Activity :(');
+
+    const toast = await this.alertController.create({
+      header: 'แจ้งเตือน',
+      message: `ท่านต้องการต้องการบันทึกข้อมูลนี้ ?`,
+      buttons: [
+        {
+          text: 'ยกเลิก',
+          handler: (blah) => {
+          }
+        },
+        {
+          text: 'ตกลง',
+          handler: async (blah) => {
+            this.activityService.addActivity(this.activity).then(() => {
+              this.navCtrl.navigateForward(`${ROUTE.ACTIVITY}/${this.groupSportID}`),
+                this.showToast("Activity added");
+            }, err => {
+              this.showToast('There was a problem adding your Activity :(');
+            });
+          }
+        }
+      ]
     });
+    await toast.present();
   }
 
-  deleteActivity() {
-    this.activityService.delateActivity(this.activity.id).then(() => {
-      this.navCtrl.navigateForward('members/tabs/tabActivity'),
-        this.showToast("Activity deleted");
-    }, err => {
-      this.showToast('There was a problem deleting your Activity :(');
+  async deleteActivity() {
+    const toast = await this.alertController.create({
+      header: 'แจ้งเตือน',
+      message: `ท่านต้องการต้องการบันทึกข้อมูลนี้ ?`,
+      buttons: [
+        {
+          text: 'ยกเลิก',
+          handler: (blah) => {
+          }
+        },
+        {
+          text: 'ตกลง',
+          handler: async (blah) => {
+            this.activityService.delateActivity(this.activity.id).then(() => {
+              this.navCtrl.navigateForward(`${ROUTE.ACTIVITY}/${this.groupSportID}`),
+                this.showToast("Activity deleted");
+            }, err => {
+              this.showToast('There was a problem deleting your Activity :(');
+            });
+          }
+        }
+      ]
     });
+    await toast.present();
   }
 
-  updateActivity() {
-    this.activityService.updateActivity(this.activity).then(() => {
-      this.showToast("Activity updated");
-    }, err => {
-      this.showToast('There was a problem updating your Activity :(');
+  async  updateActivity() {
+    const toast = await this.alertController.create({
+      header: 'แจ้งเตือน',
+      message: `ท่านต้องการต้องการบันทึกข้อมูลนี้ ?`,
+      buttons: [
+        {
+          text: 'ยกเลิก',
+          handler: (blah) => {
+          }
+        },
+        {
+          text: 'ตกลง',
+          handler: async (blah) => {
+            this.activityService.updateActivity(this.activity).then(() => {
+              this.navCtrl.navigateForward(`${ROUTE.ACTIVITY}/${this.groupSportID}`),
+                this.showToast("Activity updated");
+            }, err => {
+              this.showToast('There was a problem updating your Activity :(');
+            });
+          }
+        }
+      ]
     });
+    await toast.present();
   }
 
   showToast(mag) {

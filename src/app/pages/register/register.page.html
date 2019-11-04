@@ -23,12 +23,20 @@
 
     <ion-item>
       <ion-label position="floating" color="primary">เพศ</ion-label>
-      <ion-select placeholder="กรุณาเลือกเพศ">
-          <ion-select-option value="f">Female</ion-select-option>
-          <ion-select-option value="m">Male</ion-select-option>
-          <ion-select-option value="LG/BT">LGBT</ion-select-option>
+      <ion-select placeholder="กรุณาเลือกเพศ" formControlName="sex">
+          <ion-select-option value="Female">Female</ion-select-option>
+          <ion-select-option value="Male">Male</ion-select-option>
+          <ion-select-option value="LG/BT">LG/BT</ion-select-option>
         </ion-select>
     </ion-item>
+    <div class="validation-errors">
+        <ng-container *ngFor="let validation of validationMessages.sex">
+          <div class="error-message"
+            *ngIf="form.get('sex').hasError(validation.type) && (form.get('sex').dirty || form.get('sex').touched)">
+            {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
 
     <ion-item>
       <ion-label position="floating" color="primary">Email</ion-label>

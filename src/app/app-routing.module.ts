@@ -34,6 +34,7 @@ const routes: Routes = [
     path: 'activity-create/:groupID',
     loadChildren: './pages/activity-detail/activity-detail.module#ActivityDetailPageModule'
   },
+  { path: 'activity-read-more', loadChildren: './pages/activity-read-more/activity-read-more.module#ActivityReadMorePageModule' },
 ];
 
 @NgModule({

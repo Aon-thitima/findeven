@@ -17,13 +17,16 @@ export class RegisterPage implements OnInit {
   loading: any;
 
   validationMessages = {
-    'email': [
-      { type: 'required', message: 'Email is required.' },
-      { type: 'pattern', message: 'Enter a valid email.' }
+    email: [
+      { type: 'required', message: 'กรุณาระบุอีเมล' },
+      { type: 'pattern', message: 'รูปแบบอีเมลไม่ถูกต้อง' }
     ],
-    'password': [
-      { type: 'required', message: 'Password is required.' },
-      { type: 'minlength', message: 'Password must be at least 6 characters long.' }
+    password: [
+      { type: 'required', message: 'กรุณาระบุรหัสผ่าน' },
+      { type: 'minlength', message: 'รหัสผ่านจะต้องมีความยาวอย่างน้อย 6 ตัวอักษร' }
+    ],
+    sex: [
+      { type: 'required', message: 'กรุณาระบุเพศ.' },
     ]
   };
 
@@ -41,6 +44,9 @@ export class RegisterPage implements OnInit {
       imageProfile: new FormControl(''),
       phone: new FormControl(''),
       address: new FormControl(''),
+      sex: new FormControl('Male', Validators.compose([,
+        Validators.required
+      ])),
       email: new FormControl('', Validators.compose([
         Validators.required,
         Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')

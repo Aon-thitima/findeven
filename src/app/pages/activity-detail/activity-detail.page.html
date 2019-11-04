@@ -34,6 +34,7 @@
   <ion-item>
     <ion-label position="stacked">เพศ</ion-label>
     <ion-select placeholder="" [(ngModel)]="activity.sex">
+      <ion-select-option value="none">Male</ion-select-option>
       <ion-select-option value="Male">Male</ion-select-option>
       <ion-select-option value="Female">Female</ion-select-option>
       <ion-select-option value="LG/BT">LGBT</ion-select-option>
@@ -66,32 +67,36 @@
 
   <!-- ต้องกลับมาแก้ไข  -->
   <ion-item>
-      <ion-label position="stacked">จำนวนคนที่เข้าร่วมกิจกรรม</ion-label>
-      <ion-input type="text" [(ngModel)]="activity.people"></ion-input>
-    </ion-item>
+    <ion-label position="stacked">จำนวนคนที่เข้าร่วมกิจกรรม</ion-label>
+    <ion-input type="text" [(ngModel)]="activity.people"></ion-input>
+  </ion-item>
 
-  <ion-footer *ngIf="!activity.id">
-      <ion-button expand="block" fill="outline" (click)="addActivity()">บันทึก</ion-button>  
-  </ion-footer>
+  <!-- <ion-footer *ngIf="!activity.id">
+    <ion-button expand="block" fill="outline" (click)="addActivity()">บันทึก</ion-button>
+  </ion-footer> -->
 
 </ion-content>
 
-
+<ion-footer *ngIf="!activity.id">
+  <ion-row style="justify-content: center;">
+    <ion-col size="6">
+      <ion-button expand="block" fill="solid" color="success" (click)="addActivity()">
+        บันทึก
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-footer>
 
 <ion-footer *ngIf="activity.id">
   <ion-row>
     <ion-col size="6">
       <ion-button expand="block" fill="solid" color="danger" (click)="deleteActivity()">
-        <ion-icon slot="start" name="trash">
-          Deleted
-        </ion-icon>
+        ลบ
       </ion-button>
     </ion-col>
     <ion-col size="6">
       <ion-button expand="block" fill="solid" color="success" (click)="updateActivity()">
-        <ion-icon slot="start" name="save">
-          Update
-        </ion-icon>
+        บันทึก
       </ion-button>
     </ion-col>
   </ion-row>

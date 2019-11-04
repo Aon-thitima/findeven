@@ -16,7 +16,7 @@ export class ResetPasswordPage implements OnInit {
   form: FormGroup;
   errorMessage = '';
   validationMessages = {
-    'email': [
+    email: [
       { type: 'required', message: 'ระบุอีเมล' },
       { type: 'pattern', message: 'ระบุรูปแบบอีเมล' }
     ],

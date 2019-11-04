@@ -1,12 +1,8 @@
-import { async } from '@angular/core/testing';
-
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SPORT_GROUP } from 'src/assets/data-master/sport-group';
 import { NavController, AlertController } from '@ionic/angular';
 import { ROUTE } from 'src/app/_constants/route.constant';
-import { Observable } from 'rxjs';
-import { ActivityInterface } from 'src/app/core/models/activity.interface';
 import { ActivityService } from 'src/app/core/services/activity.service.service';
 import { JoinActivityService } from 'src/app/core/services/join-activity.service';
 import { JoinActivityInterface } from 'src/app/core/models/join-activity.interface';
@@ -34,14 +30,18 @@ export class ActivitysPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.getActivity()
     this.idSport = this.route.snapshot.paramMap.get('id');
+    this.getActivity()
     this.sportActive = this.groupSport.filter(val => val.id === this.idSport)[0]
     this.getCurrentUser();
   }
 
-  getActivity() {
-    this.activityService.getActivity().subscribe(val => this.activity = val);
+  async getActivity() {
+    this.activity = await this.activityService.searchActivity('', false)
+    // เอาเฉพาะกลุ่มกีฬา
+    if (this.activity.length > 0) {
+      this.activity = this.activity.filter(v => v.group_sport === this.idSport)
+    }
   }
   // ดึงข้อมูล user ปัจจุบัน
   async getCurrentUser() {
@@ -57,13 +57,26 @@ export class ActivitysPage implements OnInit {
 
   }
 
+  ionViewWillEnter() {
+    this.getActivity()
+  }
+
+  onClickEdit(id) {
+    this.navCtrl.navigateForward(`${ROUTE.ACTIVITY_PAGE}/${id}`)
+  }
+
   async searchActivity(textSearch) {
     try {
       if (textSearch !== '') {
         this.activity = await this.activityService.searchActivity(textSearch, true)
+        // filter เอาเฉพาะกลุ่มกิจกรรม
+        this.activity =  this.activity.filter(v => v.group_sport === this.idSport)
       } else {
         this.activity = await this.activityService.searchActivity(textSearch, false)
+        // filter เอาเฉพาะกลุ่มกิจกรรม
+        this.activity = this.activity.filter(v => v.group_sport === this.idSport)
       }
+
     } catch (error) {
     }
   }
@@ -86,7 +99,14 @@ export class ActivitysPage implements OnInit {
                 user_id: this.userInfo.uid,
                 activity_id: activity.id
               }
-              this.joinActivityService.joinActivity(setData);
+              this.joinActivityService.joinActivity(setData)
+              .catch()
+              .then(
+                _ => {
+                  console.log('then')
+                  this.getActivity()
+                }
+              )
             }
           }
         ]
@@ -113,7 +133,36 @@ export class ActivitysPage implements OnInit {
             handler: async (blah) => {
               const res = await this.joinActivityService.unJoinActivity(activity.id, this.userInfo.uid);
               if (res.description === 'success') {
+                this.getActivity()
               }
+            }
+          }
+        ]
+      });
+      await toast.present();
+    } catch (error) {
+      console.log('error======>', error)
+    }
+  }
+
+  async deleteActivity(activity) {
+    try {
+      const toast = await this.alertController.create({
+        header: 'ต้องการลบกิจกรรม?',
+        message: `ท่านต้องการลบกิจกรรม ${activity.name} ?`,
+        buttons: [
+          {
+            text: 'ยกเลิก',
+            handler: (blah) => {
+            }
+          },
+          {
+            text: 'ตกลง',
+            handler: async (blah) => {
+              this.activityService.delateActivity(activity.id).then(() => {
+                this.getActivity()
+              }, err => {
+              });
             }
           }
         ]

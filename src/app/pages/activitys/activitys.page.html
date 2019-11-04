@@ -18,9 +18,11 @@
         <img [src]="item?.userInfo?.imageProfile">
       </ion-avatar>
       <ion-label>{{item?.userInfo?.fullName}}</ion-label>
-      <ion-button *ngIf="!item?.sold_out && !item?.joined" fill="outline" slot="end" (click)="clickJoinActivity(item)">join</ion-button>
+      <ion-button *ngIf="!item?.sold_out && !item?.joined" fill="outline" slot="end" (click)="clickJoinActivity(item)">
+        join</ion-button>
       <ion-button *ngIf="item?.sold_out && !item?.joined" color="danger" slot="end">Sold Out</ion-button>
-      <ion-button *ngIf="item?.joined" color="success" slot="end" (click)="clickUnJoinActivity(item)">Joined</ion-button>
+      <ion-button *ngIf="item?.joined" color="success" slot="end" (click)="clickUnJoinActivity(item)">Joined
+      </ion-button>
     </ion-item>
 
     <ion-card-content>
@@ -32,14 +34,23 @@
     <ion-card-content>
       <ion-grid>
         <ion-row>
+          <ion-col class="btn-read-more-end">
+              <ion-button color="secondary" size="small">
+                Read More...
+              </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-grid>
+        <ion-row>
           <ion-col class="text-left">
             <ion-icon style="float: right" name="chatboxes" (click)="clickJoinChat(item.id)"></ion-icon>
           </ion-col>
           <ion-col *ngIf="userInfo?.uid === item?.createBy">
-            <ion-icon style="float: right" name="create" ></ion-icon>
+            <ion-icon style="float: right" name="create" (click)="onClickEdit(item.id)"></ion-icon>
           </ion-col>
           <ion-col *ngIf="userInfo?.uid === item?.createBy">
-            <ion-icon style="float: right" name="trash"  (click)="DelectJoinChat(item.id)"></ion-icon>
+            <ion-icon style="float: right" name="trash" (click)="deleteActivity(item)"></ion-icon>
           </ion-col>
         </ion-row>
       </ion-grid>
