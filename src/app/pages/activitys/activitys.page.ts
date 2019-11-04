@@ -20,6 +20,11 @@ export class ActivitysPage implements OnInit {
   public idSport
   public sportActive
   public userInfo: UserInterface;
+  public sexText = {
+    Male: 'ผู้ชาย',
+    Female: 'ผู้ชาย',
+    LG_BT: 'เพศทางเลือก'
+  }
   constructor(
     private activityService: ActivityService,
     private route: ActivatedRoute,
@@ -70,7 +75,7 @@ export class ActivitysPage implements OnInit {
       if (textSearch !== '') {
         this.activity = await this.activityService.searchActivity(textSearch, true)
         // filter เอาเฉพาะกลุ่มกิจกรรม
-        this.activity =  this.activity.filter(v => v.group_sport === this.idSport)
+        this.activity = this.activity.filter(v => v.group_sport === this.idSport)
       } else {
         this.activity = await this.activityService.searchActivity(textSearch, false)
         // filter เอาเฉพาะกลุ่มกิจกรรม
@@ -83,6 +88,26 @@ export class ActivitysPage implements OnInit {
 
   async clickJoinActivity(activity) {
     try {
+
+      if (activity.sex !== 'none') { // เข้าร่วมได้ทุกเพศ
+        if (activity.sex !== this.userInfo.sex) {  // ตรวจสอบ เพศที่จะเข้าร่วมได้
+          const alertSexError = await this.alertController.create({
+            header: 'แจ้งเตือน!',
+            message: `กิจกรรม ${activity.name}นี้ สามารถเข้าร่วมได้แต่ ${this.sexText[activity.sex]}`,
+            buttons: [
+              {
+                text: 'ตกลง',
+                handler: (blah) => {
+                }
+              }
+            ]
+          })
+          await alertSexError.present();
+          return
+        }
+      }
+
+      // ฟังชั่น join กลุ่ม
       const toast = await this.alertController.create({
         header: 'ต้องการเข้าร่วมกิจกรรม?',
         message: `ท่านต้องการเข้าร่วมกิจกรรม ${activity.name} ?`,
@@ -100,13 +125,13 @@ export class ActivitysPage implements OnInit {
                 activity_id: activity.id
               }
               this.joinActivityService.joinActivity(setData)
-              .catch()
-              .then(
-                _ => {
-                  console.log('then')
-                  this.getActivity()
-                }
-              )
+                .catch()
+                .then(
+                  _ => {
+                    console.log('then')
+                    this.getActivity()
+                  }
+                )
             }
           }
         ]
