@@ -10,8 +10,9 @@ export const ROUTE = {
     PHOTO: 'photo',
     ACTIVITY: 'activitys',
     ACTIVITY_PAGE: 'activity',
-    ACTIVITY_CREATE : 'activity-create',
-    CHAT: 'chat'
+    ACTIVITY_CREATE: 'activity-create',
+    CHAT: 'chat',
+    ACTIVITY_READ_MORE: 'activity-read-more'
 };
 
 

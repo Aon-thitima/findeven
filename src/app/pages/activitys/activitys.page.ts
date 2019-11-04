@@ -236,4 +236,8 @@ export class ActivitysPage implements OnInit {
     this.chatService.updateStatusJoin(this.userInfo.uid, activity.id);
   }
 
+  onClickReadMore(item) {
+    // TODO link go detail activity by id
+    this.navCtrl.navigateForward(`${ROUTE.ACTIVITY_READ_MORE}/${item.id}`);
+  }
 }
