@@ -7,6 +7,7 @@ import { JoinActivityService } from './join-activity.service';
 import { AuthenticationService } from './authentication.service';
 import { UserInterface } from '../models/user.interface';
 import * as firebase from 'firebase';
+import { FireStoreDoc } from 'src/app/_constants/app.constant';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +24,7 @@ export class ActivityService {
     private joinActivityService: JoinActivityService,
     private authService: AuthenticationService
   ) {
-    this.activityCollection = this.afs.collection<ActivityInterface>('activity'); // คำสั่งให้สร้าง table "activity" ชื่อตาราง
+    this.activityCollection = this.afs.collection<ActivityInterface>(`${FireStoreDoc.ACTIVITY}`); // คำสั่งให้สร้าง table "activity" ชื่อตาราง
     this.getCurrentUser()
     this.activity = this.activityCollection.snapshotChanges()
       .pipe(

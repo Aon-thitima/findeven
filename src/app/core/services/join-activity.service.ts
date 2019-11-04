@@ -5,7 +5,6 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { FireStoreDoc } from 'src/app/_constants/app.constant';
 import * as firebase from 'firebase';
-import { ActivityService } from './activity.service.service';
 
 @Injectable({
   providedIn: 'root'

@@ -4,7 +4,7 @@ moment.locale('th');
 @Pipe({
   name: 'moment'
 })
-export class MomentPipe implements PipeTransform {
+export class MomentPipeChat implements PipeTransform {
 
   transform(value: any, args?: any): any {
     return moment(value).calendar();

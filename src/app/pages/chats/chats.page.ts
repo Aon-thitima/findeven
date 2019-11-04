@@ -57,18 +57,18 @@ export class ChatsPage implements OnInit {
   }
 
   async getChat(id) {
-    //ฟังก์ชั่นในการดึงข้อมูลแชท
+    // ฟังก์ชั่นในการดึงข้อมูลแชท
     const response = this.chatService.getChat();
     response.subscribe(
-     (val) => this.dataChat = val.filter(v => v['groupID'] === id),
+      (val) => this.dataChat = val.filter(v => v['groupID'] === id),
       (error) => error
     );
 
-    //การ debug ดูข้อมูลใช้ console.log(ค่าที่ต้องการ log ออกมาดู)
+    // การ debug ดูข้อมูลใช้ console.log(ค่าที่ต้องการ log ออกมาดู)
   }
 
   getActivity(id) {
-     //ฟังก์ชั่นในการดึงกิจกรรม
+    // ฟังก์ชั่นในการดึงกิจกรรม
     this.activityServers.getActivityDetail(id).subscribe(async activity => {
       if (activity) {
         this.activity = activity;
@@ -77,7 +77,7 @@ export class ChatsPage implements OnInit {
   }
 
   sendMessage(e) {
-     //ฟังก์ชั่นในการส่งข้อมูลแชท
+    // ฟังก์ชั่นในการส่งข้อมูลแชท
     const data = {
       specialMessage: true,
       message: this.chat,
@@ -85,7 +85,7 @@ export class ChatsPage implements OnInit {
       joinBy: this.userInfo.uid,
       status: 'active',
       imgBy: (this.userInfo.imageProfile) ? this.userInfo.imageProfile : '',
-      fullName:this.userInfo.fullName,
+      fullName: this.userInfo.fullName,
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
     };
     if (this.chat) {

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AngularFirestoreCollection, AngularFirestore, DocumentReference } from '@angular/fire/firestore';
 import { map } from 'rxjs/operators';
+import { FireStoreDoc } from 'src/app/_constants/app.constant';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class ChatService {
   constructor(
     private afs: AngularFirestore,
   ) {
-    this.chatCollection = this.afs.collection<any>('chat');
+    this.chatCollection = this.afs.collection<any>(`${FireStoreDoc.CHAT}`);
   }
 
   joinGroup(data: any): Promise<DocumentReference> {
@@ -19,7 +20,7 @@ export class ChatService {
   }
 
   getChat(): Observable<any[]> {
-    return this.afs.collection('chat', ref => ref.orderBy("createdAt", "asc")).valueChanges();
+    return this.afs.collection(`${FireStoreDoc.CHAT}`, ref => ref.orderBy("createdAt", "asc")).valueChanges();
   }
 
   sendMessage(chat: any): Promise<DocumentReference> {
@@ -32,11 +33,11 @@ export class ChatService {
 
   checkStatusJoin(joinBy: string, groupId: string): Promise<any> {
     return new Promise((resolve, reject) => {
-      this.afs.collection('chat', ref =>
+      this.afs.collection(`${FireStoreDoc.CHAT}`, ref =>
         ref.where('joinBy', '==', joinBy)
           .where('groupID', '==', groupId)
       ).valueChanges().subscribe(
-        val => resolve((val.length === 0) ? true : val.some((v) => v['status'] === 'inactive')),
+        val => resolve((val.length === 0) ? true : val.some((v) => v['statusChat'] === 'inactive')),
         err => reject(err)
       );
     });
@@ -44,7 +45,7 @@ export class ChatService {
 
   // update status
   updateStatusJoin(joinBy: string, groupId: string) {
-    const itemsCollection = this.afs.collection('chat', ref =>
+    const itemsCollection = this.afs.collection(`${FireStoreDoc.CHAT}`, ref =>
       ref.where('joinBy', '==', joinBy)
         .where('groupID', '==', groupId));
     const items = itemsCollection.snapshotChanges().pipe(
@@ -58,7 +59,7 @@ export class ChatService {
       if (val.length !== 0) {
         val = val.filter(v => v['status'] === 'inactive');
         val.map(item => {
-          this.afs.collection('chat').doc(item['id']).ref.update({
+          this.afs.collection(`${FireStoreDoc.CHAT}`).doc(item['id']).ref.update({
             status: 'active',
           }
           );

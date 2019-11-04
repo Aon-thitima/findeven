@@ -43,7 +43,7 @@
       </ion-grid>
       <ion-grid>
         <ion-row>
-          <ion-col class="text-left">
+          <ion-col class="text-left" *ngIf="!item?.sold_out">
             <ion-icon style="float: right" name="chatboxes" (click)="clickJoinChat(item.id)"></ion-icon>
           </ion-col>
           <ion-col *ngIf="userInfo?.uid === item?.createBy">

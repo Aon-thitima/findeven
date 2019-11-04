@@ -1,3 +1,4 @@
+import { JoinChatInterface } from './../../core/models/join-chat.intereface';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SPORT_GROUP } from 'src/assets/data-master/sport-group';
@@ -8,6 +9,9 @@ import { JoinActivityService } from 'src/app/core/services/join-activity.service
 import { JoinActivityInterface } from 'src/app/core/models/join-activity.interface';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
 import { UserInterface } from 'src/app/core/models/user.interface';
+import { ChatService } from 'src/app/core/services/chat.service';
+import * as firebase from 'firebase';
+import { JoinChatService } from 'src/app/core/services/join-chat.service';
 
 @Component({
   selector: 'app-activitys',
@@ -31,7 +35,9 @@ export class ActivitysPage implements OnInit {
     private navCtrl: NavController,
     private joinActivityService: JoinActivityService,
     public alertController: AlertController,
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    private chatService: ChatService,
+    private joinChatService: JoinChatService
   ) { }
 
   ngOnInit() {
@@ -57,10 +63,7 @@ export class ActivitysPage implements OnInit {
     this.navCtrl.navigateForward(`${ROUTE.ACTIVITY_CREATE}/${this.idSport}`)
   }
 
-  clickJoinChat(id) {
-    console.log('===========>', id)
 
-  }
 
   ionViewWillEnter() {
     this.getActivity()
@@ -128,7 +131,6 @@ export class ActivitysPage implements OnInit {
                 .catch()
                 .then(
                   _ => {
-                    console.log('then')
                     this.getActivity()
                   }
                 )
@@ -196,6 +198,42 @@ export class ActivitysPage implements OnInit {
     } catch (error) {
       console.log('error======>', error)
     }
+  }
+
+  clickJoinChat(id) {
+    this.activityService.getActivityDetail(id).subscribe(async activity => {
+      const checkJoinGroup = await this.chatService.checkStatusJoin(this.userInfo.uid, activity.id);
+      if (activity && checkJoinGroup) {
+        this.joinGroup(activity);
+      } else {
+        this.navCtrl.navigateForward(`${ROUTE.CHAT}/${activity.id}`);
+      }
+    });
+
+  }
+
+
+
+  joinGroup(activity) {
+    // tslint:disable-next-line:no-construct
+    const data = {
+      specialMessage: true,
+      message: `${this.userInfo.fullName} has joined the room`,
+      groupID: activity.id,
+      joinBy: this.userInfo.uid,
+      statusChat: 'active',
+      imgBy: this.userInfo,
+      fullName: this.userInfo.fullName,
+      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+    };
+    this.chatService.joinGroup(data);
+    const dataJoinChats = {
+      user_id: this.userInfo.uid,
+      activity_id: activity.id,
+    }
+    this.joinChatService.joinChats(dataJoinChats);
+    this.navCtrl.navigateForward(`${ROUTE.CHAT}/${activity.id}`);
+    this.chatService.updateStatusJoin(this.userInfo.uid, activity.id);
   }
 
 }

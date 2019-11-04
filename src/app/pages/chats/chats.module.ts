@@ -6,6 +6,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { ChatsPage } from './chats.page';
+import { MomentPipe } from 'src/app/_shared/pipes/moment.pipe';
+import { MomentPipeChat } from 'src/app/_shared/pipes/moment-chat.pipe';
 
 const routes: Routes = [
   {
@@ -21,6 +23,6 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [ChatsPage]
+  declarations: [ChatsPage, MomentPipeChat]
 })
 export class ChatsPageModule {}
