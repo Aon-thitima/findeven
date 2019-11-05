@@ -40,6 +40,7 @@ const routes: Routes = [
         children: [
           {
             path: '',
+            loadChildren:'../tab-settings/tab-settings.module#TabSettingsPageModule'
           }
         ]
       },
