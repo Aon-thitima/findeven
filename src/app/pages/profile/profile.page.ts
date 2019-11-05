@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
 import { UserInterface } from 'src/app/core/models/user.interface';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ROUTE } from 'src/app/_constants/route.constant';
 
 @Component({
@@ -11,39 +11,69 @@ import { ROUTE } from 'src/app/_constants/route.constant';
   styleUrls: ['./profile.page.scss'],
 })
 export class ProfilePage implements OnInit {
-
   userInfo: UserInterface;
-
+  userInfoDetail: any = ''
+  userID = ''
+  selectEdit = false;
+  selectEditModel = {
+    fullName: '',
+    imageProfile: '',
+    phone: '',
+    address: ''
+  }
   constructor(
     private navCtrl: NavController,
     private router: Router,
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    private activatedRoute: ActivatedRoute,
   ) { }
 
   ngOnInit() {
+    this.userID = this.activatedRoute.snapshot.paramMap.get('id');
     this.getUserDetail();
+    this.getCurrentUser();
   }
 
   gotoBack() {
     this.navCtrl.navigateBack('');
   }
 
+  // ดึงข้อมูล user ปัจจุบัน
+  async getCurrentUser() {
+    this.userInfo = await this.authService.getUser();
+    console.log('  this.userInfo=====>',  this.userInfo)
+  }
+
   private async getUserDetail() {
     try {
-      const userInfo = await this.authService.getUser();
-      this.userInfo = userInfo;
-    } catch (error) {}
+      this.userInfoDetail = await this.authService.getUserDetail(this.userID);
+      console.log(' this.userInfoDetail=====>',  this.userInfoDetail)
+    } catch (error) { }
   }
 
   async logout() {
     try {
       await this.authService.logoutUser();
       this.router.navigateByUrl('login');
-    } catch (error) {}
+    } catch (error) { }
   }
 
-  gotoUserDetail() {
-    this.navCtrl.navigateForward(ROUTE.HOME_DETAIL);
+  editProfile() {
+    this.selectEdit = true
+    this.selectEditModel = {
+      fullName: '',
+      imageProfile: '',
+      phone: '',
+      address: ''
+    }
   }
 
+  onCancelEdit() {
+    this.selectEdit = !this.selectEdit
+  }
+
+
+  onClickReportUser(userId) {
+    // TODO REPORT USER
+  }
 }

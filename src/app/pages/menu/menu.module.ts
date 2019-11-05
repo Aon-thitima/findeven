@@ -11,16 +11,6 @@ const routes: Routes = [
   {
     path: '',
     component: MenuPage,
-    children: [
-      {
-        path: '',
-        loadChildren: '../tabs/tabs.module#TabsPageModule'
-      },
-      {
-        path: 'profile',
-        loadChildren: '../profile/profile.module#ProfilePageModule'
-      }
-    ]
   }
 ];
 

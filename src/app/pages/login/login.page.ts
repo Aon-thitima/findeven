@@ -15,11 +15,11 @@ export class LoginPage implements OnInit {
   form: FormGroup;
   errorMessage = '';
   validationMessages = {
-    'email': [
+    email: [
       { type: 'required', message: 'Email is required.' },
       { type: 'pattern', message: 'Please enter a valid email.' }
     ],
-    'password': [
+    password: [
       { type: 'required', message: 'Password is required.' },
       { type: 'pattern', message: 'Password must be at least 5 char.' }
     ]

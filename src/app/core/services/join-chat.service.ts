@@ -8,6 +8,7 @@ import { map } from 'rxjs/operators';
 import { JoinChatInterface } from '../models/join-chat.intereface';
 import * as firebase from 'firebase';
 import { SPORT_GROUP } from 'src/assets/data-master/sport-group';
+import { isNull, isNullOrUndefined } from 'util';
 
 @Injectable({
   providedIn: 'root'
@@ -50,7 +51,7 @@ export class JoinChatService {
                 .then(activityInfo => {
                   Object.assign(data, {
                     activityInfo,
-                    image: this.sportMaster.filter(v => v.id === activityInfo['group_sport'] ? v.image : '')[0].image
+                    image: !isNullOrUndefined(activityInfo) ? this.sportMaster.filter(v => v.id === activityInfo['group_sport'] ? v.image : '')[0].image : ''
                   }
                   )
                 }

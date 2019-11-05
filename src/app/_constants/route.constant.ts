@@ -12,7 +12,8 @@ export const ROUTE = {
     ACTIVITY_PAGE: 'activity',
     ACTIVITY_CREATE: 'activity-create',
     CHAT: 'chat',
-    ACTIVITY_READ_MORE: 'activity-read-more'
+    ACTIVITY_READ_MORE: 'activity-read-more',
+    PROFILE: 'profile'
 };
 
 

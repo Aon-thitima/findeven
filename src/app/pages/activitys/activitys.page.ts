@@ -1,4 +1,4 @@
-import { JoinChatInterface } from './../../core/models/join-chat.intereface';
+
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SPORT_GROUP } from 'src/assets/data-master/sport-group';

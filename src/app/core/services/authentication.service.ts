@@ -6,7 +6,7 @@ import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firest
 import { Observable, of } from 'rxjs';
 import { UserInterface } from '../models/user.interface';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { switchMap, first} from 'rxjs/operators';
+import { switchMap, first } from 'rxjs/operators';
 import { FireStoreDoc } from '../../_constants/app.constant';
 
 @Injectable({
@@ -39,7 +39,7 @@ export class AuthenticationService {
     return firebase.auth().createUserWithEmailAndPassword(value.email, value.password)
       .then(
         (res) => this.updateProfile(res.user.uid, value),
-        (err) => {}
+        (err) => { }
       );
   }
 
@@ -70,6 +70,16 @@ export class AuthenticationService {
     };
 
     userRef.set(data, { merge: true });
+  }
+
+  getUserDetail(uid: string) {
+    return new Promise((resolve, reject) => {
+      const res = this.afs.doc<UserInterface>(`${FireStoreDoc.USER_PROFILE}/${uid}`).valueChanges()
+      res.subscribe(
+        (data) => resolve(data),
+        (err) => reject(err)
+      )
+    })
   }
 
 }

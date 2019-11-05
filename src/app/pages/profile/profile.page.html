@@ -1,45 +1,67 @@
 <ion-header>
-  <ion-toolbar color="primary">
-    <ion-title>ข้อมูลส่วนตัว</ion-title>
+  <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button defaulthref=""></ion-back-button>
     </ion-buttons>
+    <ion-title>ข้อมูลส่วนตัว</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content fullscreen class="page-profile">
-  
-    <!-- <div style="text-align: center;">
-      <img class="profile-image top-10px"
-        src="http://www.brunningonline.net/simon/blog/archives/South%20Park%20Avatar.jpg">
-    </div> -->
-    
-    <div style="text-align: center;">
-      <img class="profile-image top-10px"
-        src="{{userInfo?.imageProfile}}">
-        <ion-button (click)="gotoPhoto()">แก้ไขข้อมูลส่วนตัว</ion-button >
+<ion-content fullscreen class="page-profile" padding>
+  <div class="container" *ngIf="userInfoDetail">
+    <div class="d-flex justify-content-center mt-2">
+      <div class="image_outer_container">
+        <div class="green_icon"></div>
+        <div class="image_inner_container">
+          <img
+            [src]="userInfoDetail?.imageProfile !== '' ? userInfoDetail?.imageProfile : 'assets/images/default-profile-picture-png.png' ">
+        </div>
+      </div>
     </div>
-    <br>
-    <div padding>
-      <ion-label style="color:blue;">Email </ion-label> : {{userInfo?.email}}<br>
-      <hr>
-      <ion-label style="color:blue;">FullName</ion-label>  : {{userInfo?.fullName}}<br>
-      <hr>
-      <ion-label style="color:blue;">Phone</ion-label>  : {{userInfo?.phone}}<br>
-      <hr>
-      <ion-label style="color:blue;">Address</ion-label> : {{userInfo?.address}}<br>
-      <!-- <hr> -->
+    <div *ngIf="!selectEdit">
+      <div class="text-center">
+        <h4>
+          {{userInfoDetail?.fullName}}
+          <ion-icon *ngIf="userInfo?.uid === userInfoDetail?.uid" name="create" class="edit-icon"
+            (click)="editProfile()"></ion-icon>
+        </h4>
+        <ion-button color="secondary" size="small" *ngIf="userInfo?.uid !== userInfoDetail?.uid" (click)="onClickReportUser(userInfoDetail?.uid)">Report</ion-button>
+      </div>
+      <p>
+        <ion-icon name="mail" style="font-size: 22px;"></ion-icon>
+        <span class="text-detail"> : {{userInfoDetail?.email}} </span>
+      </p>
+      <p>
+        <ion-icon name="call" style="font-size: 22px;"></ion-icon>
+        <span class="text-detail"> : {{userInfoDetail?.phone}}</span>
+      </p>
+      <p>
+        ที่อยู่ : {{userInfoDetail?.address}}
+      </p>
+      <div class="mt-5 text-center">
+        <ion-button *ngIf="userInfo?.uid === userInfoDetail?.uid"  size="small" color="primary" (click)="logout()">ออกจากระบบ</ion-button>
+      </div>
     </div>
-    
-    <!-- <h4>{{userInfo?.fullName}}</h4>
-    <h5>{{userInfo?.email}}</h5>
-    <h5>{{userInfo?.phone}}</h5>
-    <h5>{{userInfo?.address}}</h5>
-    <h5>{{ '24'}} years old</h5> -->
-    <!-- <ion-button (click)="gotoUserDetail()">Details</ion-button> -->
-    <div style="text-align: center;">
-      <ion-button (click)="logout()">Logout</ion-button>
+  </div>
+  <div *ngIf="selectEdit" class="mt-5">
+    <ion-item>
+      <ion-label position="stacked">ชื่อ-นามสกุล</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">เบอร์โทร</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">ที่อยู่</ion-label>
+      <ion-textarea></ion-textarea>
+    </ion-item>
+    <div class="mt-5 text-center">
+      <section>
+        <ion-button size="small" color="light" (click)="onCancelEdit()">ยกเลิก</ion-button>
+        <ion-button size="small" color="primary">บันทึก</ion-button>
+      </section>
     </div>
 
-  
+  </div>
 </ion-content>

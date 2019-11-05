@@ -27,29 +27,24 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'tabHome/homeDetail',
-        loadChildren: '../home-detail/home-detail.module#HomeDetailPageModule'
-      },
-      {
-        path: 'tabSettings',
+        path: 'tabMenu',
         children: [
           {
             path: '',
-            loadChildren: '../tab-settings/tab-settings.module#TabSettingsPageModule'
+            loadChildren: '../menu/menu.module#MenuPageModule'
           }
         ]
       },
       {
-        path: 'tabProfile',
+        path: 'tabNotification',
         children: [
           {
             path: '',
-            loadChildren: '../profile/profile.module#ProfilePageModule'
           }
         ]
       },
       {
-        path: 'tabActivity',
+        path: 'chats',
         children: [
           {
             path: '',
@@ -57,18 +52,6 @@ const routes: Routes = [
           },
         ]
       },
-      {
-        path: 'tabActivity/detail',
-        loadChildren: '../activity-detail/activity-detail.module#ActivityDetailPageModule'
-      },
-      {
-        path: 'tabActivity/:id',
-        loadChildren: '../activity-detail/activity-detail.module#ActivityDetailPageModule'
-      },
-      // {
-      //   path: 'tabActivity/chat/:id',
-      //   loadChildren: '../chats/chats.module#ChatsPageModule'
-      // }
     ]
   },
   {
@@ -85,6 +68,7 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [TabsPage]
+  declarations: [TabsPage],
+  exports: [TabsPage]
 })
 export class TabsPageModule { }

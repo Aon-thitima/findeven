@@ -1,38 +1,27 @@
+import { ROUTE } from './../../_constants/route.constant';
 import { Component, OnInit } from '@angular/core';
-import { Router, RouterEvent } from '@angular/router';
+import { Router} from '@angular/router';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
+import { NavController } from '@ionic/angular';
+import { UserInterface } from 'src/app/core/models/user.interface';
 
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.page.html',
   styleUrls: ['./menu.page.scss'],
 })
+
 export class MenuPage implements OnInit {
-  selectPath = '';
-
-  pages = [
-    {
-      title: 'หน้าหลัก',
-      url: '/members'
-    },
-    {
-      title: 'ข้อมูลส่วนตัว',
-      url: '/members/profile'
-    }
-  ];
-
+  public userInfo: UserInterface;
   constructor(
     private authService: AuthenticationService,
-    private router: Router
+    private router: Router,
+    private navCtrl: NavController,
   ) {
-    this.router.events.subscribe((event: RouterEvent) => {
-      if (event && event.url) {
-        this.selectPath = event.url;
-      }
-    });
   }
 
   ngOnInit() {
+    this.getCurrentUser()
   }
 
   async logout() {
@@ -41,5 +30,14 @@ export class MenuPage implements OnInit {
       this.router.navigateByUrl('login');
     } catch (error) {}
   }
+
+    // ดึงข้อมูล user ปัจจุบัน
+    async getCurrentUser() {
+      this.userInfo = await this.authService.getUser();
+    }
+
+    yourProfileUser() {
+      this.navCtrl.navigateForward(`${ROUTE.PROFILE}/${this.userInfo.uid}`)
+    }
 
 }
