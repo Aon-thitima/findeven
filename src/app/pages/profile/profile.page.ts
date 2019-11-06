@@ -61,10 +61,10 @@ export class ProfilePage implements OnInit {
   editProfile() {
     this.selectEdit = true
     this.selectEditModel = {
-      fullName: '',
-      imageProfile: '',
-      phone: '',
-      address: ''
+      fullName:  this.userInfoDetail.fullName,
+      imageProfile: this.userInfoDetail.imageProfile,
+      phone: this.userInfoDetail.phone,
+      address: this.userInfoDetail.address
     }
   }
 

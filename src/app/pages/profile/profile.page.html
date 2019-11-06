@@ -46,15 +46,15 @@
   <div *ngIf="selectEdit" class="mt-5">
     <ion-item>
       <ion-label position="stacked">ชื่อ-นามสกุล</ion-label>
-      <ion-input type="text"></ion-input>
+      <ion-input type="text" [(ngModel)]="selectEditModel.fullName"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="stacked">เบอร์โทร</ion-label>
-      <ion-input type="text"></ion-input>
+      <ion-input type="text" [(ngModel)]="selectEditModel.phone"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="stacked">ที่อยู่</ion-label>
-      <ion-textarea></ion-textarea>
+      <ion-textarea [(ngModel)]="selectEditModel.address"></ion-textarea>
     </ion-item>
     <div class="mt-5 text-center">
       <section>
