@@ -55,7 +55,7 @@ export class AuthenticationService {
     return firebase.auth().sendPasswordResetEmail(email);
   }
 
-  private updateProfile(uid: string, user: RegisterInterface) {
+  updateProfile(uid: string, user: RegisterInterface) {
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(`${FireStoreDoc.USER_PROFILE}/${uid}`);
 
     const data = {
@@ -66,7 +66,6 @@ export class AuthenticationService {
       phone: user.phone,
       imageProfile: user.imageProfile,
       sex: user.sex
-      // imageProfile: user.imageProfile
     };
 
     userRef.set(data, { merge: true });
