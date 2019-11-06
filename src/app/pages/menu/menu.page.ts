@@ -1,6 +1,6 @@
 import { ROUTE } from './../../_constants/route.constant';
 import { Component, OnInit } from '@angular/core';
-import { Router} from '@angular/router';
+import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
 import { NavController } from '@ionic/angular';
 import { UserInterface } from 'src/app/core/models/user.interface';
@@ -28,16 +28,24 @@ export class MenuPage implements OnInit {
     try {
       await this.authService.logoutUser();
       this.router.navigateByUrl('login');
-    } catch (error) {}
+    } catch (error) { }
   }
 
-    // ดึงข้อมูล user ปัจจุบัน
-    async getCurrentUser() {
-      this.userInfo = await this.authService.getUser();
-    }
+  // ดึงข้อมูล user ปัจจุบัน
+  async getCurrentUser() {
+    this.userInfo = await this.authService.getUser();
+  }
 
-    yourProfileUser() {
-      this.navCtrl.navigateForward(`${ROUTE.PROFILE}/${this.userInfo.uid}`)
-    }
+  yourProfileUser() {
+    this.navCtrl.navigateForward(`${ROUTE.PROFILE}/${this.userInfo.uid}`)
+  }
+
+  viewReport() {
+    this.navCtrl.navigateForward(`${ROUTE.REPORT_LIST}`)
+  }
+
+  viewHelp() {
+    this.navCtrl.navigateForward(`${ROUTE.HELP}`)
+  }
 
 }

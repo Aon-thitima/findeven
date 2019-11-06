@@ -38,6 +38,9 @@ const routes: Routes = [
     path: 'profile/:id',
     loadChildren: './pages/profile/profile.module#ProfilePageModule'
   },
+  { path: 'help', loadChildren: './pages/help/help.module#HelpPageModule' },
+  { path: 'report-list', loadChildren: './pages/report-list/report-list.module#ReportListPageModule' },
+  { path: 'report-detail', loadChildren: './pages/report-detail/report-detail.module#ReportDetailPageModule' },
 ];
 
 @NgModule({
