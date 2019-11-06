@@ -3,7 +3,6 @@ import { NavController } from '@ionic/angular';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
 import { UserInterface } from 'src/app/core/models/user.interface';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ROUTE } from 'src/app/_constants/route.constant';
 
 @Component({
   selector: 'app-profile',
@@ -41,13 +40,11 @@ export class ProfilePage implements OnInit {
   // ดึงข้อมูล user ปัจจุบัน
   async getCurrentUser() {
     this.userInfo = await this.authService.getUser();
-    console.log('  this.userInfo=====>',  this.userInfo)
   }
 
   private async getUserDetail() {
     try {
       this.userInfoDetail = await this.authService.getUserDetail(this.userID);
-      console.log(' this.userInfoDetail=====>',  this.userInfoDetail)
     } catch (error) { }
   }
 

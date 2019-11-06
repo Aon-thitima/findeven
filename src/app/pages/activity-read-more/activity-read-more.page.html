@@ -7,7 +7,53 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <p> กิจกรรม: {{ item?.name }} </p>
-      <p> สถานที่: {{ item?.Location }} </p>
+<ion-content padding>
+  <div class="row" style="margin-top: -20px;">
+    <div class="col-12">
+      <ion-item (click)="viewProfile(activityItem?.userInfo?.uid)">
+        <ion-avatar slot="start">
+          <img [src]="activityItem?.userInfo?.imageProfile">
+        </ion-avatar>
+        <ion-label>
+          <h2>{{ activityItem?.userInfo?.fullName }}</h2>
+          <p>{{ 'ผู้จัดตั้งกิจกรรม' }}</p>
+        </ion-label>
+      </ion-item>
+    </div>
+    <div class="col-12">
+      <h1>{{ activityItem?.name }}</h1>
+    </div>
+    <div class="col-12">
+      <p><span *ngIf="activityItem?.description" class="title-description"> วันเวลา:
+        </span>{{ activityItem?.date | date: 'dd/MM/yyyy' }}</p>
+    </div>
+    <div class="col-12">
+      <p><span *ngIf="activityItem?.description" class="title-description"> สถานที่:
+        </span>{{ activityItem?.Location }}</p>
+    </div>
+    <div class="col-12">
+      <p><span *ngIf="activityItem?.description" class="title-description">รายละเอียด:
+        </span>{{ activityItem?.description }}</p>
+    </div>
+  </div>
+  <div class="row" style="border-top: 1px solid #dedcdc;">
+    <div class="col-6 mt-2">
+      <span class="title-description">ผู้เข้าร่วมกิจกรรม</span>
+    </div>
+    <div class="col-6 mt-2">
+      <!-- TODO BUTTON JOIN -->
+    </div>
+  </div>
+  <div class="row mt-4">
+    <div class="col-12">
+      <ion-item *ngFor="let item of userJoinActivity" (click)="viewProfile(item?.user_id)">
+        <ion-avatar slot="start">
+          <img [src]="item?.userInfo?.imageProfile">
+        </ion-avatar>
+        <ion-label>
+          <h2>{{ item?.userInfo?.fullName }}</h2>
+        </ion-label>
+      </ion-item>
+    </div>
+  </div>
 </ion-content>
