@@ -30,6 +30,7 @@
       <p> สถานที่: {{ item?.Location }} </p>
       <p class="cut-text"> รายละเอียด: {{ item?.description }}</p>
       <p> เวลา : {{item?.date | moment}}</p>
+      <p> เพศ : {{ item?.sex }}</p>
     </ion-card-content>
     <ion-card-content>
       <ion-grid>
@@ -58,7 +59,7 @@
   </ion-card>
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="onCreateActivity()">
-    <ion-fab-button>
+    <ion-fab-button size ="small">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
