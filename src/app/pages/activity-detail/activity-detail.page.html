@@ -42,8 +42,8 @@
   </ion-item>
 
   <ion-item>
-    <ion-label position="stacked">DD MM YYYY</ion-label>
-    <ion-datetime [(ngModel)]="activity.date" displayFormat="DD MM YYYY" placeholder="Select Date"></ion-datetime>
+    <ion-label position="stacked">DD/MM/YYYY</ion-label>
+    <ion-datetime [(ngModel)]="activity.date" displayFormat="DD/MM/YYYY" min="2016" max="2030-10-31" placeholder="Select Date"></ion-datetime>
   </ion-item>
 
   <ion-item>
