@@ -42,13 +42,13 @@
   </ion-item>
 
   <ion-item>
-    <ion-label position="stacked">DD MM YYYY</ion-label>
-    <ion-datetime [(ngModel)]="activity.date" displayFormat="DD MM YYYY" placeholder="Select Date"></ion-datetime>
+    <ion-label position="stacked">วันที่</ion-label>
+    <ion-datetime [(ngModel)]="activity.date" displayFormat="DD/MM/YYYY" min="2016" max="2030-10-31" placeholder="เลือกวันที่"></ion-datetime>
   </ion-item>
 
   <ion-item>
-      <ion-label position="stacked">HH:mm</ion-label>
-      <ion-datetime [(ngModel)]="activity.date" displayFormat="HH:mm" placeholder="Select Time"></ion-datetime>
+      <ion-label position="stacked">เวลา</ion-label>
+      <ion-datetime [(ngModel)]="activity.date" displayFormat="HH:mm" placeholder="เลือกเวลา"></ion-datetime>
     </ion-item>
 
   <ion-item>
