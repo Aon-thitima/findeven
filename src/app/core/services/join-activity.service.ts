@@ -7,6 +7,7 @@ import { map } from 'rxjs/operators';
 import { FireStoreDoc } from 'src/app/_constants/app.constant';
 import * as firebase from 'firebase';
 import { AuthenticationService } from './authentication.service';
+import { ActivityService } from './activity.service.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class JoinActivityService {
   private joinActivitysCollection: AngularFirestoreCollection<JoinActivityInterface>;
   constructor(
     private afs: AngularFirestore,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
   ) {
     this.joinActivitysCollection = this.afs.collection<JoinActivityInterface>(`${FireStoreDoc.JOIN_ACTIVITY}`); // คำสั่งให้สร้าง table "activity" ชื่อตาราง
     this.joinActivitys = this.joinActivitysCollection.snapshotChanges()
@@ -100,6 +101,27 @@ export class JoinActivityService {
     } catch (error) {
 
     }
+  }
 
+
+  getJoinActivityByUserID(userId: string) {
+    try {
+      return new Promise((resolve, reject) => {
+        const res = this.afs.collection(`${FireStoreDoc.JOIN_ACTIVITY}`, ref => ref.where('user_id', '==', `${userId}`)).valueChanges()
+        res.subscribe(
+          (data) => {
+            data.map(async val => Object.assign(val, {
+              userInfo: await this.authenticationService.getUserDetail(val['user_id']),
+              // activityInfo: await this.activityService.checkActivity(val['activity_id'])
+            }))
+            resolve(data)
+          }
+          ,
+          (err) => reject(err)
+        )
+      })
+    } catch (error) {
+
+    }
   }
 }
