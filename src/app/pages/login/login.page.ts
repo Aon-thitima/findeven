@@ -4,6 +4,12 @@ import { AuthenticationService } from '../../core/services/authentication.servic
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthInterface } from '../../core/models/auth.interface';
 import { ROUTE } from 'src/app/_constants/route.constant';
+import { Platform } from '@ionic/angular';
+import { AngularFireDatabase } from '@angular/fire/database';
+import { AngularFireAuth } from '@angular/fire/auth';
+import * as firebase from 'firebase/app';
+import { Facebook } from '@ionic-native/facebook/ngx';
+
 
 @Component({
   selector: 'app-login',
@@ -11,6 +17,8 @@ import { ROUTE } from 'src/app/_constants/route.constant';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
+  providerFb: firebase.auth.FacebookAuthProvider;
+  [x: string]: any;
 
   form: FormGroup;
   errorMessage = '';
@@ -31,8 +39,60 @@ export class LoginPage implements OnInit {
     private authService: AuthenticationService,
     private formBuilder: FormBuilder,
     public alertController: AlertController,
-    public loadingCtrl: LoadingController
+    public loadingCtrl: LoadingController,
+    public afDB: AngularFireDatabase,
+    public afAuth: AngularFireAuth,
+    private fb: Facebook,
+    public platform: Platform
   ) { }
+
+  facebookLogin() {
+    if (this.platform.is('cordova')){
+      console.log('platform: cordova');
+      this.facebookCordova();
+    }else{
+      console.log('platform: web');
+      this.facebookWeb();
+    }
+  }
+
+  facebookCordova() {
+    this.fb.login(['email']).then( (response) => {
+        const facebookCredential = firebase.auth.FacebookAuthProvider
+            .credential(response.authResponse.accessToken);
+        firebase.auth().signInWithCredential(facebookCredential)
+        .then((success) => {
+        console.log("Firebase success: " + JSON.stringify(success));
+        console.log('FullName: ' + success.user.displayName);
+        console.log('UID: ' + success.user.uid);
+        console.log('ImageProfile: ' + success.user.photoURL);
+        this.afDB.object('user/' + success.user.uid).set({
+          FullName: success.user.displayName,
+          ImageProfile: success.user.photoURL,
+        });
+
+        }).catch((error) => {
+            console.log('Erreur:' + JSON.stringify(error));
+        });
+    }).catch((error) => { console.log(error); })
+}
+
+facebookWeb() {
+  this.afAuth.auth
+    .signInWithPopup(new firebase.auth.FacebookAuthProvider())
+    .then((success) => {
+      console.log("Firebase success: " + JSON.stringify(success));
+        console.log('FullName: ' + success.user.displayName);
+        console.log('UID: ' + success.user.uid);
+        console.log('ImageProfile: ' + success.user.photoURL);
+        this.afDB.object('user/' + success.user.uid).set({
+          FullName: success.user.displayName,
+          ImageProfile: success.user.photoURL,
+        });
+    }).catch((error) => {
+      console.log('Erreur: ' + JSON.stringify(error));
+    });
+}
 
   ngOnInit() {
     this.form = this.formBuilder.group({
