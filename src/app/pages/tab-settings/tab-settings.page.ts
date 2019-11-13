@@ -16,8 +16,5 @@ export class TabSettingsPage implements OnInit {
   ngOnInit() {
   }
 
-  gotoAbout() {
-    this.navCtrl.navigateForward(ROUTE.ABOUT);
-  }
 
 }

@@ -20,8 +20,8 @@
       <ion-label>{{item?.userInfo?.fullName}}</ion-label>
       <ion-button *ngIf="!item?.sold_out && !item?.joined" fill="outline" slot="end" (click)="clickJoinActivity(item)">
         join</ion-button>
-      <ion-button *ngIf="item?.sold_out && !item?.joined" color="danger" slot="end">Sold Out</ion-button>
-      <ion-button *ngIf="item?.joined" color="success" slot="end" (click)="clickUnJoinActivity(item)">Joined
+      <ion-button *ngIf="item?.sold_out && !item?.joined" color="danger" slot="end">Full</ion-button>
+      <ion-button *ngIf="item?.joined" color="success" slot="end" (click)="clickUnJoinActivity(item)">Cancel
       </ion-button>
     </ion-item>
 
