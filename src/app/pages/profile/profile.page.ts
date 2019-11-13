@@ -1,8 +1,11 @@
+import { async } from '@angular/core/testing';
 import { Component, OnInit } from '@angular/core';
 import { NavController, AlertController } from '@ionic/angular';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
 import { UserInterface } from 'src/app/core/models/user.interface';
 import { Router, ActivatedRoute } from '@angular/router';
+import { ReportUserInterface } from 'src/app/core/models/report-user.interface';
+import { ReportUserService } from 'src/app/core/services/report_user.service';
 
 @Component({
   selector: 'app-profile',
@@ -11,6 +14,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class ProfilePage implements OnInit {
   userInfo: UserInterface;
+  activityID: any
   userInfoDetail: any = ''
   userID = ''
   selectEdit = false;
@@ -26,10 +30,12 @@ export class ProfilePage implements OnInit {
     private authService: AuthenticationService,
     private activatedRoute: ActivatedRoute,
     public alertController: AlertController,
+    private reportUserService: ReportUserService
   ) { }
 
   ngOnInit() {
     this.userID = this.activatedRoute.snapshot.paramMap.get('id');
+    this.activityID = this.activatedRoute.snapshot.paramMap.get('activityID');
     this.getUserDetail();
     this.getCurrentUser();
   }
@@ -102,7 +108,83 @@ export class ProfilePage implements OnInit {
   }
 
 
-  onClickReportUser(userId) {
+  async onClickReportUser(userId?: any) {
     // TODO REPORT USER
+    const alert = await this.alertController.create({
+      header: 'สาเหตุ',
+      inputs: [
+        {
+          name: 'description',
+          type: 'text',
+          placeholder: 'สาเหตุ'
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+          }
+        }, {
+          text: 'Ok',
+          handler: data => {
+            if (data.description === "") {
+              this.failedAlert("กรุณากรอกรายละเอียดการรีพอท", userId);
+            } else {
+              this.reportUser(data.description)
+            }
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  async failedAlert(text, userId) {
+    const alert = await this.alertController.create({
+      header: 'เเจ้งเตือน',
+      subHeader: text,
+      buttons: [{
+        text: 'OK',
+        handler: () => {
+          this.onClickReportUser(userId);
+        }
+      }]
+
+    });
+    await alert.present();
+  }
+
+  async reportUser(description) {
+    const formData: ReportUserInterface = {
+      description,
+      user_id: this.userID,
+      activity_id: this.activityID,
+      reportAt: this.userInfo.uid
+    }
+
+    const checkReportDuplicate = await this.reportUserService.checkUserReport(formData)
+    if (checkReportDuplicate['length'] > 0) {
+      this.failedAlertDuplicate('ไม่สามารถรายงานผู้ใช้นี้ได้ เนื่องจากท่านได้รายงานผู้ใช้ในกิจกรรมนี้ไปแล้ว')
+    } else {
+      this.reportUserService.postReportUser(formData)
+    }
+  }
+
+
+  async failedAlertDuplicate(text) {
+    const alert = await this.alertController.create({
+      header: 'เเจ้งเตือน',
+      subHeader: text,
+      buttons: [{
+        text: 'OK',
+        handler: () => {
+        }
+      }]
+
+    });
+    await alert.present();
   }
 }

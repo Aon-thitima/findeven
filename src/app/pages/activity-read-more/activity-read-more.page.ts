@@ -42,6 +42,6 @@ export class ActivityReadMorePage implements OnInit {
   }
 
   viewProfile(uid) {
-    this.navCtrl.navigateForward(`${ROUTE.PROFILE}/${uid}`)
+    this.navCtrl.navigateForward(`${ROUTE.PROFILE}/${uid}/${this.activityID}`)
   }
 }

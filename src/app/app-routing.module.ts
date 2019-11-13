@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AuthenticationGuard } from './core/guard/authentication.guard';
+import { CheckUserReportGuard } from './core/guard/check-report-user.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'members', pathMatch: 'full' },
   {
     path: 'members',
-    canActivate: [AuthenticationGuard],
+    canActivate: [AuthenticationGuard, CheckUserReportGuard],
     loadChildren: './pages/tabs/tabs.module#TabsPageModule',
   },
   {
@@ -16,7 +17,6 @@ const routes: Routes = [
   { path: 'register', loadChildren: './pages/register/register.module#RegisterPageModule' },
   { path: 'reset-password', loadChildren: './pages/reset-password/reset-password.module#ResetPasswordPageModule' },
   { path: 'popover', loadChildren: './pages/popover/popover.module#PopoverPageModule' },
-  { path: 'photo', loadChildren: './pages/photo/photo.module#PhotoPageModule' },
   { path: 'activitys/:id', loadChildren: './pages/activitys/activitys.module#ActivitysPageModule' },
   {
     path: 'activity/:id',
@@ -38,9 +38,14 @@ const routes: Routes = [
     path: 'profile/:id',
     loadChildren: './pages/profile/profile.module#ProfilePageModule'
   },
+  {
+    path: 'profile/:id/:activityID',
+    loadChildren: './pages/profile/profile.module#ProfilePageModule'
+  },
   { path: 'help', loadChildren: './pages/help/help.module#HelpPageModule' },
   { path: 'report-list', loadChildren: './pages/report-list/report-list.module#ReportListPageModule' },
-  { path: 'report-detail', loadChildren: './pages/report-detail/report-detail.module#ReportDetailPageModule' },
+  { path: 'report-detail/:id', loadChildren: './pages/report-detail/report-detail.module#ReportDetailPageModule' },
+  { path: 'page-report', loadChildren: './pages/page-report/page-report.module#PageReportPageModule' },
 ];
 
 @NgModule({

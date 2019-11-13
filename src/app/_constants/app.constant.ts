@@ -7,5 +7,6 @@ export enum FireStoreDoc {
     JOIN_ACTIVITY = 'join_activity',
     JOIN_CHAT = 'join_chat',
     CHAT = 'chat',
-    ACTIVITY = 'activity'
+    ACTIVITY = 'activity',
+    REPORT_USER = 'report_user'
 }

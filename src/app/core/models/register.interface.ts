@@ -7,4 +7,5 @@ export interface RegisterInterface extends AuthInterface {
     phone?: string;
     address?: string;
     imageProfile?: string;
+    userReport?: boolean
 }

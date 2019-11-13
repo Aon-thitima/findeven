@@ -1,9 +1,32 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaulthref=""></ion-back-button>
+    </ion-buttons>
     <ion-title>report-detail</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+    <ion-card *ngFor="let item of listDetail">
+        <ion-item>
+          <ion-avatar slot="start">
+            <img [src]="item?.userReportInfo?.imageProfile">
+          </ion-avatar>
+          <ion-label>
+              <h2>{{ item?.userReportInfo?.fullName }}</h2>
+              <p>ผู้รายงาน</p>
+          </ion-label>
+        </ion-item>
+    
+        <ion-card-content>
+          <p> รายละเอียด: {{ item?.description }} 
+        </ion-card-content>
+      </ion-card>
+      <div class="row" *ngIf="listDetail">
+        <div class="col text-center">
+            <ion-button color="danger" *ngIf="!userInfoDetail?.userReport" (click)="onClickReport()">บล็อกผู้ใช้งาน</ion-button>
+            <ion-button color="warning" *ngIf="userInfoDetail?.userReport"  (click)="onClickUnReport()">เปิดใช้งานผู้ใช้</ion-button>
+        </div>
+      </div> 
 </ion-content>

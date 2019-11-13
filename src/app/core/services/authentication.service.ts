@@ -65,10 +65,22 @@ export class AuthenticationService {
       address: user.address,
       phone: user.phone,
       imageProfile: user.imageProfile,
-      sex: user.sex
+      sex: user.sex,
+      userReport: false
     };
 
     userRef.set(data, { merge: true });
+  }
+
+  reportUser(uid: string, userReportType: boolean) {
+    const userRef: AngularFirestoreDocument<any> = this.afs.doc(`${FireStoreDoc.USER_PROFILE}/${uid}`);
+
+    const data = {
+      userReport: userReportType
+    };
+
+    userRef.set(data, { merge: true });
+    return {description: 'success'}
   }
 
   getUserDetail(uid: string) {

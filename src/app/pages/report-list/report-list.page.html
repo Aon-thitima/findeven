@@ -8,5 +8,13 @@
 </ion-header>
 
 <ion-content padding>
-  COMBING SOON
+  <ion-item *ngFor="let item of listUserReport" (click)="viewDetailUserReport(item?.userInfo?.uid)">
+    <ion-avatar slot="start">
+      <img [src]="item?.userInfo?.imageProfile">
+    </ion-avatar>
+    <ion-label>
+      <h2>{{ item?.userInfo?.fullName }}</h2>
+      <p>รายละเอียด...</p>
+    </ion-label>
+  </ion-item>
 </ion-content>
