@@ -22,6 +22,7 @@ export class ProfilePage implements OnInit {
     fullName: '',
     imageProfile: '',
     phone: '',
+    sex:'',
     address: ''
   }
   constructor(
@@ -68,6 +69,7 @@ export class ProfilePage implements OnInit {
       fullName: this.userInfoDetail.fullName,
       imageProfile: this.userInfoDetail.imageProfile,
       phone: this.userInfoDetail.phone,
+      sex:this.userInfoDetail.sex,
       address: this.userInfoDetail.address
     }
   }
@@ -82,6 +84,7 @@ export class ProfilePage implements OnInit {
       fullName: this.selectEditModel.fullName !== '' ? this.selectEditModel.fullName : this.userInfoDetail.fullName,
       imageProfile: this.selectEditModel.imageProfile !== '' ? this.selectEditModel.imageProfile : this.userInfoDetail.imageProfile,
       phone: this.selectEditModel.phone !== '' ? this.selectEditModel.phone : this.userInfoDetail.phone,
+      sex:this.selectEditModel.sex !=='' ? this.selectEditModel.sex : this.userInfoDetail.sex,
       address: this.selectEditModel.address !== '' ? this.selectEditModel.address : this.userInfoDetail.address
     }
     // รวม object

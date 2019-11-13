@@ -25,7 +25,8 @@
           <ion-icon *ngIf="userInfo?.uid === userInfoDetail?.uid" name="create" class="edit-icon"
             (click)="editProfile()"></ion-icon>
         </h4>
-        <ion-button color="secondary" size="small" *ngIf="userInfo?.uid !== userInfoDetail?.uid" (click)="onClickReportUser(userInfoDetail?.uid)">Report</ion-button>
+        <ion-button color="secondary" size="small" *ngIf="userInfo?.uid !== userInfoDetail?.uid"
+          (click)="onClickReportUser(userInfoDetail?.uid)">Report</ion-button>
       </div>
       <p>
         <ion-icon name="mail" style="font-size: 22px;"></ion-icon>
@@ -36,10 +37,14 @@
         <span class="text-detail"> : {{userInfoDetail?.phone}}</span>
       </p>
       <p>
+        เพศ : {{userInfoDetail?.sex}}
+      </p>
+      <p>
         ที่อยู่ : {{userInfoDetail?.address}}
       </p>
       <div class="mt-5 text-center">
-        <ion-button *ngIf="userInfo?.uid === userInfoDetail?.uid"  size="small" color="primary" (click)="logout()">ออกจากระบบ</ion-button>
+        <ion-button *ngIf="userInfo?.uid === userInfoDetail?.uid" size="small" color="primary" (click)="logout()">
+          ออกจากระบบ</ion-button>
       </div>
     </div>
   </div>

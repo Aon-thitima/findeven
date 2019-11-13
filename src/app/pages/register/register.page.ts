@@ -44,7 +44,7 @@ export class RegisterPage implements OnInit {
       imageProfile: new FormControl(''),
       phone: new FormControl(''),
       address: new FormControl(''),
-      sex: new FormControl('Male', Validators.compose([,
+      sex: new FormControl('กรุณาระบุเพศ', Validators.compose([,
         Validators.required
       ])),
       email: new FormControl('', Validators.compose([
