@@ -47,52 +47,57 @@ export class LoginPage implements OnInit {
   ) { }
 
   facebookLogin() {
-    if (this.platform.is('cordova')){
+    if (this.platform.is('cordova')) {
       console.log('platform: cordova');
       this.facebookCordova();
-    }else{
+    } else {
       console.log('platform: web');
       this.facebookWeb();
     }
   }
 
   facebookCordova() {
-    this.fb.login(['email']).then( (response) => {
-        const facebookCredential = firebase.auth.FacebookAuthProvider
-            .credential(response.authResponse.accessToken);
-        firebase.auth().signInWithCredential(facebookCredential)
+    this.fb.login(['email']).then((response) => {
+      const facebookCredential = firebase.auth.FacebookAuthProvider
+        .credential(response.authResponse.accessToken);
+      firebase.auth().signInWithCredential(facebookCredential)
         .then((success) => {
-        console.log("Firebase success: " + JSON.stringify(success));
-        console.log('FullName: ' + success.user.displayName);
-        console.log('UID: ' + success.user.uid);
-        console.log('ImageProfile: ' + success.user.photoURL);
-        this.afDB.object('user/' + success.user.uid).set({
-          FullName: success.user.displayName,
-          ImageProfile: success.user.photoURL,
-        });
-
+          const dataProfile = {
+            email: success.user.email,
+            fullName: success.user.displayName,
+            address: '',
+            phone: success.user.phoneNumber,
+            imageProfile: success.user.photoURL,
+            sex: '', // หน้าแก้ไขโปรไฟล์ไปเพิ่ม อัปเดทเพสด้วย
+            userReport: false
+          }
+          this.authService.updateProfile(success.user.uid, dataProfile)
+          this.navCtrl.navigateForward(ROUTE.MEMBER);
         }).catch((error) => {
-            console.log('Erreur:' + JSON.stringify(error));
+          console.log('Erreur:' + JSON.stringify(error));
         });
     }).catch((error) => { console.log(error); })
-}
+  }
 
-facebookWeb() {
-  this.afAuth.auth
-    .signInWithPopup(new firebase.auth.FacebookAuthProvider())
-    .then((success) => {
-      console.log("Firebase success: " + JSON.stringify(success));
-        console.log('FullName: ' + success.user.displayName);
-        console.log('UID: ' + success.user.uid);
-        console.log('ImageProfile: ' + success.user.photoURL);
-        this.afDB.object('user/' + success.user.uid).set({
-          FullName: success.user.displayName,
-          ImageProfile: success.user.photoURL,
-        });
-    }).catch((error) => {
-      console.log('Erreur: ' + JSON.stringify(error));
-    });
-}
+  facebookWeb() {
+    this.afAuth.auth
+      .signInWithPopup(new firebase.auth.FacebookAuthProvider())
+      .then((success) => {
+        const dataProfile = {
+          email: success.user.email,
+          fullName: success.user.displayName,
+          address: '',
+          phone: success.user.phoneNumber,
+          imageProfile: success.user.photoURL,
+          sex: '', // หน้าแก้ไขโปรไฟล์ไปเพิ่ม อัปเดทเพสด้วย
+          userReport: false
+        }
+        this.authService.updateProfile(success.user.uid, dataProfile)
+        this.navCtrl.navigateForward(ROUTE.MEMBER);
+      }).catch((error) => {
+        console.log('Erreur: ' + JSON.stringify(error));
+      });
+  }
 
   ngOnInit() {
     this.form = this.formBuilder.group({

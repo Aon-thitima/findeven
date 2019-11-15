@@ -55,7 +55,7 @@ export class AuthenticationService {
     return firebase.auth().sendPasswordResetEmail(email);
   }
 
-  updateProfile(uid: string, user: RegisterInterface) {
+  updateProfile(uid: string, user: any) {
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(`${FireStoreDoc.USER_PROFILE}/${uid}`);
 
     const data = {
