@@ -1,5 +1,7 @@
 {
   "name": "firebaseAuthIonic4Eau",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
