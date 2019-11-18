@@ -65,10 +65,10 @@ export class LoginPage implements OnInit {
           const dataProfile = {
             email: success.user.email,
             fullName: success.user.displayName,
-            address: '',
+            address: '', //เพิ่มในหน้าแก้ไข
             phone: success.user.phoneNumber,
             imageProfile: success.user.photoURL,
-            sex: '', // หน้าแก้ไขโปรไฟล์ไปเพิ่ม อัปเดทเพสด้วย
+            sex: '',
             userReport: false
           }
           this.authService.updateProfile(success.user.uid, dataProfile)
@@ -86,10 +86,10 @@ export class LoginPage implements OnInit {
         const dataProfile = {
           email: success.user.email,
           fullName: success.user.displayName,
-          address: '',
+          address: '', //เพิ่มในหน้าแก้ไข
           phone: success.user.phoneNumber,
           imageProfile: success.user.photoURL,
-          sex: '', // หน้าแก้ไขโปรไฟล์ไปเพิ่ม อัปเดทเพสด้วย
+          sex: '',
           userReport: false
         }
         this.authService.updateProfile(success.user.uid, dataProfile)

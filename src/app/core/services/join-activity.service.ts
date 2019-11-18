@@ -110,10 +110,15 @@ export class JoinActivityService {
         const res = this.afs.collection(`${FireStoreDoc.JOIN_ACTIVITY}`, ref => ref.where('user_id', '==', `${userId}`)).valueChanges()
         res.subscribe(
           (data) => {
-            data.map(async val => Object.assign(val, {
-              userInfo: await this.authenticationService.getUserDetail(val['user_id']),
-              // activityInfo: await this.activityService.checkActivity(val['activity_id'])
-            }))
+            data.map(async val => {
+              this.afs.collection(`${FireStoreDoc.ACTIVITY}`).doc(val['activity_id']).valueChanges()
+                .subscribe(async activityInfo => {
+                  Object.assign(val, {
+                    userInfo: await this.authenticationService.getUserDetail(val['user_id']),
+                    activityInfo
+                  })
+                })
+            })
             resolve(data)
           }
           ,

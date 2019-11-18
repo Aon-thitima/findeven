@@ -1,9 +1,20 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>page-report</ion-title>
+    <ion-title>บัญชีผู้ใช้ถูกระงับ</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-card-content>
+    <h1 class="pp1"> ขออภัย </h1>
+    <p class="ion-text-center"> user ของท่านถูกปิดการใช้งาน
+        เนื่องจากมีผู้รายงานการกระทำความผิดจำนวนมาก
+        และซึ่งเป็นความจริง ระบบจึงปิดการใช้งานของท่าน </p>
+  </ion-card-content>
 
+  <ion-item class="pp2" ion-button color="danger" (click)="logout()">
+    <ion-label>
+      <h2>ตกลง</h2>
+    </ion-label>
+  </ion-item>
 </ion-content>
