@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "282833365124",
+    "firebase_url": "https://chat-781dd.firebaseio.com",
+    "project_id": "chat-781dd",
+    "storage_bucket": "chat-781dd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:282833365124:android:b902cdff67aec739ed3ad1",
+        "android_client_info": {
+          "package_name": "com.myapp.findevent"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "282833365124-fuq2s4cfjmgclganpv42ih2uk0np5d85.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB6LicYIPViRCsOiZ-H-mjGXIf0exkXTRA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "282833365124-fuq2s4cfjmgclganpv42ih2uk0np5d85.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

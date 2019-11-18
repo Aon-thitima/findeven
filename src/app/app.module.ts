@@ -19,6 +19,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthGuard } from '@angular/fire/auth-guard';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { PopoverPageModule } from './pages/popover/popover.module';
+import { Facebook } from '@ionic-native/facebook/ngx';
 
 // Initial Firebase with ionicApp
 @NgModule({
@@ -36,6 +37,7 @@ import { PopoverPageModule } from './pages/popover/popover.module';
     PopoverPageModule
   ],
   providers: [
+    Facebook,
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },

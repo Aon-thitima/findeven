@@ -13,7 +13,7 @@ export class CheckUserReportGuard implements CanActivate {
         state: RouterStateSnapshot
     ): boolean {
         this.auth.user$.subscribe(val => {
-            if (val['userReport']) {
+            if (val && val['userReport']) {
                 this.router.navigateByUrl('page-report');
             }
             return true

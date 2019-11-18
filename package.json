@@ -5,12 +5,17 @@
   "homepage": "https://ionicframework.com/",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --host 0.0.0.0 --port 4202 --aot=false",
+    "dev": "ng serve --host 0.0.0.0 --port 4202 --aot=true -c develop",
+    "clear:android": "ionic cordova platforms remove android && ionic cordova platforms add android",
+    "clear:ios": "ionic cordova platforms remove ios --save && ionic cordova platforms add ios --save",
     "lab": "ionic serve -l",
-    "build": "ng build",
-    "test": "ng test",
-    "lint": "ng lint",
-    "e2e": "ng e2e"
+    "start:android": "npm run clear:android && npm run build:android && ionic cordova run android -l",
+    "build:android": "ionic cordova build android",
+    "start:ios": "ionic cordova run ios -l",
+    "build:ios": "npm run clear:ios && ionic cordova build ios",
+    "build:prod-android": "npm run clear:android && ionic cordova build --prod --release android",
+    "build:prod-ios": "ionic cordova build --prod --release ios"
   },
   "private": true,
   "dependencies": {
@@ -23,10 +28,16 @@
     "@angular/platform-browser-dynamic": "~8.1.2",
     "@angular/router": "~8.1.2",
     "@ionic-native/core": "^5.0.0",
+    "@ionic-native/facebook": "^5.16.0",
+    "@ionic-native/firebase": "^5.16.0",
     "@ionic-native/splash-screen": "^5.0.0",
     "@ionic-native/status-bar": "^5.0.0",
     "@ionic/angular": "^4.7.1",
+    "cordova": "^9.0.0",
+    "cordova-android": "^8.1.0",
+    "cordova-ios": "5.0.1",
     "cordova-plugin-facebook4": "^6.2.0",
+    "cordova-plugin-firebase": "^2.0.5",
     "core-js": "^2.5.4",
     "firebase": "^6.5.0",
     "moment": "^2.24.0",
@@ -59,7 +70,13 @@
     "protractor": "~5.4.0",
     "ts-node": "~7.0.0",
     "tslint": "~5.15.0",
-    "typescript": "~3.4.3"
+    "typescript": "~3.4.3",
+    "cordova-plugin-whitelist": "1.3.3",
+    "cordova-plugin-statusbar": "2.4.2",
+    "cordova-plugin-device": "2.0.2",
+    "cordova-plugin-splashscreen": "5.0.2",
+    "cordova-plugin-ionic-webview": "^4.0.0",
+    "cordova-plugin-ionic-keyboard": "^2.0.5"
   },
   "description": "An Ionic project",
   "cordova": {
@@ -67,7 +84,17 @@
       "cordova-plugin-facebook4": {
         "APP_ID": "1306863189492888",
         "APP_NAME": "Findevent"
-      }
-    }
+      },
+      "cordova-plugin-firebase": {},
+      "cordova-plugin-whitelist": {},
+      "cordova-plugin-statusbar": {},
+      "cordova-plugin-device": {},
+      "cordova-plugin-splashscreen": {},
+      "cordova-plugin-ionic-webview": {},
+      "cordova-plugin-ionic-keyboard": {}
+    },
+    "platforms": [
+      "android"
+    ]
   }
 }
