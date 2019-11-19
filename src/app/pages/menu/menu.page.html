@@ -1,39 +1,3 @@
-<!-- <ion-split-pane>
-  <ion-menu contentId="content">
-
-    <ion-header>
-      <ion-toolbar color="primary">
-        <ion-title>เมนู</ion-title>
-      </ion-toolbar>
-    </ion-header>
-
-    <ion-content>
-      <ion-list>
-        <ion-menu-toggle auto-hide="false" *ngFor="let p of pages">
-          <ion-item 
-            [routerLink]="p.url"
-            [class.active-item]="selectPath.startsWith(p.url)">
-            <ion-label>
-              {{ p.title }}
-            </ion-label>
-          </ion-item>
-        </ion-menu-toggle>
-
-        <ion-item
-          tappable
-          (click)="logout()"
-          routerDirection="root">
-          <ion-icon name="log-out" slot="start"></ion-icon>
-          ออกจากระบบ
-        </ion-item>
-      </ion-list>
-    </ion-content>
-  </ion-menu>
-
-  <ion-router-outlet id="content" main></ion-router-outlet>
-  
-</ion-split-pane> -->
-
 <ion-header translucent>
   <ion-toolbar>
     <ion-title>เมนู</ion-title>
